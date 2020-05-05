@@ -7,5 +7,10 @@
         insert  into user(user_name,first_name,last_name,password,phone) values(#{user_name},#{first_name},#{last_name},#{password},#{phone})
     </insert>
 
+    <!--signIn-->
+    <select id="signIn" parameterType="User" resultType="User">
+        select * from user where user_id=#{user_id} and password=#{password}
+    </select>
+
 
 </mapper>

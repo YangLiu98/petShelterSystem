@@ -4,5 +4,7 @@ import com.example.demo.entity.User;
 
 
 public interface UserDao {
-    int insert(User user);
+    public int insert(User user);
+
+    public User signIn(User user);
 }

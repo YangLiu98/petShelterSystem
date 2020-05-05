@@ -22,4 +22,10 @@ public class UserController {
     public ResponseEntity<String> signUp(User user){
         return userService.insertUser(user);
     }
+
+    //用户登录
+    @PostMapping("signIn")
+    public ResponseEntity<String> signIn(User user){
+        return userService.signIn(user);
+    }
 }
