@@ -1,5 +1,7 @@
 package com.example.demo.util.constant;
 
 public class Constant {
-    public static final String JWT_SECERT = "In_a_Wonderland_they_lie_Dreaming_as_the_days_go_by_Dreaming_as_the_summers_die_Ever_drifting_down_the_stream_Lingering_in_the_golden_dream_Life_what_is_it_but_a_dream=";
+    //"In a wonderland they lie. Dreaming as the days go by. Dreaming as the summers die. Ever drifting down the stream. Lingering in the golden gleam. Life,what is it but a dream?";
+    public static final String JWT_SECERT = "InAWonderlandTheyLie0DreamingAsTheDaysGoBy0DreamingAsTheSummersDie0EverDiftingDownTheStream0LingeringInTheGoldenGleam0Life0What IsItButADream";
+
 }
