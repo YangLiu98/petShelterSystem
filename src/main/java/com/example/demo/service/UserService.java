@@ -11,4 +11,10 @@ public interface UserService {
     //登入
     public ResponseEntity<String> signIn(User user);
 
+    //根据用户昵称查找
+    public ResponseEntity<String> isUserNameDumplicate(User user);
+
+    //根据用户电话查找
+    public ResponseEntity<String> isPhoneDumplicate(User user);
+
 }

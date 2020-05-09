@@ -32,4 +32,20 @@ public class UserServiceImpl implements  UserService{
         }
         return ResponseFactory.unauthorized(user.getUser_id().toString());
     }
+
+    @Override
+    public ResponseEntity<String> isUserNameDumplicate(User user) {
+        if(userDao.selectByUserName(user)!=null){
+            return ResponseFactory.badRequest("user_name has existed");
+        }
+        return ResponseFactory.success("user_name not found");
+    }
+
+    @Override
+    public ResponseEntity<String> isPhoneDumplicate(User user) {
+        if(userDao.selectByPhone(user)!=null){
+            return ResponseFactory.badRequest("phone has existed");
+        }
+        return ResponseFactory.success("phone not found");
+    }
 }

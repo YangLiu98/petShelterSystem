@@ -12,5 +12,15 @@
         select * from user where user_id=#{user_id} and password=#{password}
     </select>
 
+    <!--select by user_name-->
+    <select id="selectByUserName" parameterType="User" resultType="User">
+        select * from user where user_name=#{user_name}
+    </select>
+
+    <!--select by phone-->
+    <select id="selectByPhone" parameterType="User" resultType="User">
+        select * from user where phone=#{phone}
+    </select>
+
 
 </mapper>
