@@ -19,15 +19,17 @@ public class UserController {
 
     //用户注册
     @PostMapping("/signUp")
-    public ResponseEntity<String> signUp( User user){
+    public ResponseEntity<String> signUp(@RequestBody User user){
+//                System.out.println(user);
+//        return null;
         return userService.insertUser(user);
     }
 
     //用户登录
     @PostMapping("signIn")
     public ResponseEntity<String> signIn(@RequestBody User user){
-        return userService.signIn(user);
-        //        System.out.println(user);
+       return userService.signIn(user);
+//                System.out.println(user);
 //        return null;
     }
 

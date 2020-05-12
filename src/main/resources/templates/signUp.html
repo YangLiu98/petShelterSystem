@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+
+        function testUserName(){
+            var userName = document.getElementById("userName").value;
+            var label = document.getElementById("userNameLabel");
+            var xhr = new XMLHttpRequest();
+            if(userName == ""){
+                label.innerText = "用户名不能为空";
+            }else{
+                // xhr.onreadystatechange = function() {
+                //     if (xhr.readyState == 4 && xhr.status == 200) {
+                //         //alert(","+xhr.responseText+",");
+                //         if(xhr.responseText == "user_name not found"){
+                //             label.innerText = "";
+                //             alert("可以使用的用户名");
+                //         }else{
+                //             alert("用户名已存在");
+                //             label.innerText = "用户名已存在";
+                //         }
+                //
+                //     }
+                // }
+                var data={
+                    user_name:userName
+                };
+                data= JSON.stringify(data);
+                url="http://localhost:8989/petshelter/user/isUserNameDumplicate"
+                xhr.open("post", url, true)
+                xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+                xhr.send(data);
+
+
+            }
+
+        }
+
+        function testLastName(){
+            var lastName=document.getElementById("lastName").value;
+            var label=document.getElementById("lastNameLabel");
+            if(lastName == ""){
+                label.innerText="姓不可以为空";
+            }else{
+                label.innerText="";
+            }
+
+        }
+
+        function testFirstName(){
+            var firstName=document.getElementById("firstName").value;
+            var label=document.getElementById("firstNameLabel");
+            if(firstName == ""){
+                label.innerText="名不可以为空";
+            }else{
+                label.innerText="";
+            }
+
+        }
+
+        function testPassword1(){
+            var password1=document.getElementById("password1").value;
+            var label=document.getElementById("password1Label");
+            if(password1 == ""){
+                label.innerText="密码不可以为空";
+            }else{
+                label.innerText="";
+            }
+        }
+
+        function testPassword2(){
+            var password1=document.getElementById("password1").value;
+            var password2=document.getElementById("password2").value;
+            var label=document.getElementById("password2Label");
+            if(password2 == ""){
+                label.innerText="确认密码不可以为空";
+            }else{
+                if(password1!=password2){
+                    label.innerText="两次输入的密码不一致";
+                }else{
+                    label.innerText="";
+                }
+
+            }
+        }
+
+        function testTelephone(){
+            var lastName=document.getElementById("telephone").value;
+            var label=document.getElementById("telephoneLabel");
+            if(lastName == ""){
+                label.innerText="电话不可以为空";
+            }else{
+                label.innerText="";
+            }
+        }
+
+        function testEmail(){
+
+        }
+
+        function testAddress(){
+
+        }
+
+        function signUp() {
+            var username = document.getElementById("userName").value;
+            var lastName = document.getElementById("lastName").value;
+            var firstName = document.getElementById("firstName").value;
+            var password = document.getElementById("password1").value;
+            var telephone = document.getElementById("telephone").value;
+            var email = document.getElementById("email").value;
+            var address = document.getElementById("address").value;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    alert(xhr.responseText);
+                }
+            }
+            var data={
+                user_name:username,
+                first_name:firstName,
+                last_name:lastName,
+                password:password,
+                phone:telephone
+            };
+            data= JSON.stringify(data);
+            url="http://localhost:8989/petshelter/user/signUp"
+            xhr.open("post", url, true)
+            xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+            xhr.send(data);
+
+        }
+    </script>
+</head>
+<body>
+
+
+    昵称<input type="text" id="userName" onblur ="testUserName()">
+    <label id="userNameLabel"></label><br/>
+    姓<input type="text" id="lastName" onblur="testLastName()">
+    <label id="lastNameLabel"></label><br/>
+    名<input type="text" id="firstName" onblur="testFirstName()">
+    <label id="firstNameLabel"></label><br/>
+    请输入密码<input type="password" id="password1" onblur="testPassword1()">
+    <label id="password1Label"></label><br/>
+    请确认您的密码<input type="password" id="password2" onblur="testPassword2()">
+    <label id="password2Label"></label><br/>
+    电话<input type="tel" id="telephone" onblur="testTelephone()">
+    <label id="telephoneLabel"></label><br/>
+    邮箱<input type="email" id="email" onblur="testEmail()">
+    <label id="emailLabel"></label><br/>
+    地址<input type="text" id="address" onfocus="testAddress()">
+    <label id="addressLabel"></label><br/>
+
+
+<input type="button" value="注册" id="register" onclick="signUp()">
+</body>
+</html>
