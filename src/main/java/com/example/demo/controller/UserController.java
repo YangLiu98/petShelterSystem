@@ -34,13 +34,13 @@ public class UserController {
     }
 
     //检查用户名是否已存在
-    @PostMapping("isUserNameDumplicate")
+    @PostMapping("/isUserNameDumplicate")
     public ResponseEntity<String> isUserNameDumplicate(@RequestBody User user){
         return userService.isUserNameDumplicate(user);
     }
 
     //检查用户电话是否已存在
-    @PostMapping("isPhoneDumplicate")
+    @PostMapping("/isPhoneDumplicate")
     public ResponseEntity<String> isPhoneDumplicate(@RequestBody User user){
         return userService.isPhoneDumplicate(user);
     }
