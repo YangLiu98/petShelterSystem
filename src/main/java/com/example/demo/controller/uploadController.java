@@ -19,8 +19,6 @@ public class uploadController {
         //跳转到 templates 目录下的 uploadimg.html
         System.out.println("登陆界面");
         return "upload";
-
-
     }
 
     //处理文件上传
