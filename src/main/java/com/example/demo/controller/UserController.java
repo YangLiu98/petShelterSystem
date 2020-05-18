@@ -2,12 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
+import com.example.demo.util.annotation.NeedToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/user")
@@ -43,5 +46,18 @@ public class UserController {
     @PostMapping("/isPhoneDumplicate")
     public ResponseEntity<String> isPhoneDumplicate(@RequestBody User user){
         return userService.isPhoneDumplicate(user);
+    }
+
+    //测试token功能
+    @NeedToken(function=NeedToken.Logged_User)
+    @PostMapping("/testToken")
+    public ResponseEntity<String> testToken(){
+        return new ResponseEntity<String>("pass",OK);
+    }
+    //测试token功能2
+    @NeedToken(function=NeedToken.Admin)
+    @PostMapping("/testToken2")
+    public ResponseEntity<String> testToken2(){
+        return new ResponseEntity<String>("pass",OK);
     }
 }

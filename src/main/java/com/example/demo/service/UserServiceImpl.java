@@ -48,4 +48,9 @@ public class UserServiceImpl implements  UserService{
         }
         return ResponseFactory.success("phone not found");
     }
+
+    @Override
+    public User getUserByName(User user) {
+        return userDao.selectByUserName(user);
+    }
 }

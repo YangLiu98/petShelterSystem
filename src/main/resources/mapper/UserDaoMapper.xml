@@ -22,5 +22,11 @@
         select * from user where phone=#{phone}
     </select>
 
+    <!--select admin by username-->
+    <select id="selectAdminByName" parameterType="User" resultType="User">
+        select * from user where user_name=#{user_name} and is_admin=1
+    </select>
+
+
 
 </mapper>

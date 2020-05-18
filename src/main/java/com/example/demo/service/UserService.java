@@ -17,4 +17,8 @@ public interface UserService {
     //根据用户电话查找
     public ResponseEntity<String> isPhoneDumplicate(User user);
 
+    //根据用户昵称查找
+    public User getUserByName(User user);
+
+
 }
