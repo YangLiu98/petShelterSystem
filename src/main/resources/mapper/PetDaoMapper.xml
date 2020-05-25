@@ -7,5 +7,66 @@
         insert  into pet(type,species,breed,color,size,sex,birthday,remark,tag,main_pic,pic,video) values(#{type},#{species},#{breed},#{color},#{size},#{sex},#{birthday},#{remark},#{tag},#{main_pic},#{pic},#{video})
     </insert>
 
+    <!--select pet by pet_id-->
+    <select id="selectPetByPetId" parameterType="Pet" resultType="Pet">
+        select * from pet where pet_id=#{pet_id}
+    </select>
+
+    <!--get all pet-->
+    <select id="selectAll" resultType="hashmap">
+        select * from pet
+    </select>
+
+    <!--select-->
+    <select id="select" parameterType="Pet" resultType="hashmap">
+        select * from pet where 1=1
+        <if test="pet_id!=null">
+            and pet_id=#{pet_id}
+        </if>
+        <if test="type!=null">
+            and type=#{type}
+        </if>
+        <if test="species!=null">
+            and species=#{species}
+        </if>
+        <if test="breed!=null">
+            and breed=#{breed}
+        </if>
+        <if test="color!=null">
+            and color=#{color}
+        </if>
+        <if test="size!=null">
+            and size=#{size}
+        </if>
+        <if test="sex!=null">
+            and sex=#{sex}
+        </if>
+        <if test="birthday!=null">
+            and birthday=#{birthday}
+        </if>
+        <if test="remark!=null">
+            and remark=#{remark}
+        </if>
+    </select>
+
+    <!--select with tag-->
+    <select id="selectByTag" parameterType="TagSet" resultType="hashmap">
+        select * from pet where 1=0
+        <if test="tag1!=null">
+            or tag like CONCAT(CONCAT('%',#{tag1},'%'))
+        </if>
+        <if test="tag2!=null">
+            or tag like CONCAT(CONCAT('%',#{tag2},'%'))
+        </if>
+        <if test="tag3!=null">
+            or tag like CONCAT(CONCAT('%',#{tag3},'%'))
+        </if>
+        <if test="tag4!=null">
+            or tag like CONCAT(CONCAT('%',#{tag4},'%'))
+        </if>
+        <if test="tag5!=null">
+            or tag like CONCAT(CONCAT('%',#{tag5},'%'))
+        </if>
+    </select>
 
 </mapper>

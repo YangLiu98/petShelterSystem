@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Pet;
+import com.example.demo.entity.TagSet;
 import com.example.demo.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/pet")
@@ -21,5 +25,31 @@ public class PetController {
     public ResponseEntity<String> signUp(@RequestBody Pet pet){
         System.out.println(pet);
         return petService.insertPet(pet);
+    }
+
+    //根据pet_id返回pet信息，未找到返回null
+    @PostMapping("detail")
+    public ResponseEntity<Pet> getDetial(@RequestBody Pet pet){
+        System.out.println(pet);
+        return petService.getDetial(pet);
+    }
+
+    //根据pet_id返回pet信息，未找到返回null
+    @PostMapping("all")
+    public ResponseEntity<List<Map<String,Object>>> getAll(){
+        return petService.getAll();
+    }
+
+    //精确查找
+    @PostMapping("select")
+    public ResponseEntity<List<Map<String,Object>>> select(@RequestBody Pet pet){
+        return petService.select(pet);
+    }
+
+    //Tag查找，支持最多5个Tag
+    //该方法返回值已根据Tag相关度排序
+    @PostMapping("selectByTag")
+    public ResponseEntity<List<Map<String,Object>>> selectByTag(@RequestBody TagSet tagSet){
+        return petService.selectByTag(tagSet);
     }
 }
