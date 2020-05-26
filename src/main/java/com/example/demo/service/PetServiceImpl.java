@@ -91,4 +91,13 @@ public class PetServiceImpl implements PetService {
         }
         return ResponseFactory.success(temp);
     }
+
+    @Override
+    public ResponseEntity<String> update(Pet pet) {
+        int count=petDao.update(pet);
+        if(count==0){
+            return ResponseFactory.badRequest("Failed to update");
+        }
+        return ResponseFactory.success("Success to update");
+    }
 }

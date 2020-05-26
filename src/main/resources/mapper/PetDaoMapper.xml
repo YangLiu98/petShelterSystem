@@ -69,4 +69,53 @@
         </if>
     </select>
 
+
+    <!--update-->
+    <update id="update" parameterType="Pet">
+        update pet set pet_id=pet_id
+        <if test="type!=null">
+            , type= #{type}
+        </if>
+        <if test="species!=null">
+            , species= #{species}
+        </if>
+        <if test="breed!=null">
+            , breed= #{breed}
+        </if>
+        <if test="color!=null">
+            , color= #{color}
+        </if>
+        <if test="size!=null">
+            , size= #{size}
+        </if>
+        <if test="sex!=null">
+            , sex= #{sex}
+        </if>
+        <if test="birthday!=null">
+            , birthday= #{birthday}
+        </if>
+        <if test="remark!=null">
+            , remark= #{remark}
+        </if>
+        <if test="birthday!=null">
+            , birthday= #{birthday}
+        </if>
+        <if test="remark!=null">
+            , remark= #{remark}
+        </if>
+        <if test="tag!=null">
+            , tag= #{tag}
+        </if>
+        <if test="main_pic!=null">
+            , main_pic= #{main_pic}
+        </if>
+        <if test="pic!=null">
+            , pic= #{pic}
+        </if>
+        <if test="video!=null">
+            , pic= #{video}
+        </if>
+        where pet_id=#{pet_id}
+    </update>
+
 </mapper>

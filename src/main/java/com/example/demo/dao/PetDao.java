@@ -17,4 +17,6 @@ public interface PetDao {
     public List<Map<String,Object>> select(Pet pet);
 
     public List<Map<String,Object>> selectByTag(TagSet tagSet);
+
+    public int update(Pet pet);
 }

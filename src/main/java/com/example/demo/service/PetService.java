@@ -23,4 +23,7 @@ public interface PetService {
 
     //Tag查找
     public ResponseEntity<List<Map<String,Object>>> selectByTag(TagSet tagSet);
+
+    //更新宠物信息
+    public ResponseEntity<String> update(Pet pet);
 }

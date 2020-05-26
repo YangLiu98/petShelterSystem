@@ -52,4 +52,11 @@ public class PetController {
     public ResponseEntity<List<Map<String,Object>>> selectByTag(@RequestBody TagSet tagSet){
         return petService.selectByTag(tagSet);
     }
+
+    //更新宠物信息
+    @PostMapping("update")
+    public ResponseEntity<String> update(@RequestBody Pet pet){
+        System.out.println(pet);
+        return petService.update(pet);
+    }
 }
