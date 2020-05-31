@@ -1,0 +1,89 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.FindDao">
+
+    <!--insert-->
+    <insert id="insert" parameterType="Find">
+        insert into findd(user_id,pet_id,from_date,to_date,reward)values(#{user_id},#{pet_id},current_timestamp,#{to_date},#{reward})
+    </insert>
+
+    <!--select by Findid-->
+    <select id="selectByFindId" parameterType="Find" resultType="Find">
+        select * from find where find_id=#{find_id}
+    </select>
+
+    <!--select by Userid-->
+    <select id="selectByUserId" parameterType="Find" resultType="Find">
+        select * from find where user_id=#{user_id}
+    </select>
+
+    <!--select all-->
+    <select id="select" parameterType="Find" resultType="hashmap">
+        select * from find where 1=1
+        <if test="find_id!=null">
+            and find_id=#{find_id}
+        </if>
+        <if test="user_id!=null">
+            and user_id=#{user_id}
+        </if>
+        <if test="pet_id!=null">
+            and pet_id=#{pet_id}
+        </if>
+        <if test="from_date!=null">
+            and from_date=#{from_date}
+        </if>
+        <if test="to_date!=null">
+            and to_date=#{to_date}
+        </if>
+        <if test="reward!=null">
+            and reward=#{reward}
+        </if>
+        <if test="reward_value!=null">
+            and reward_value=#{reward_value}
+        </if>
+        <if test="reward_others!=null">
+            and reward_others=#{reward_others}
+        </if>
+        <if test="remark!=null">
+            and remark=#{remark}
+        </if>
+        <if test="found!=null">
+            and found=#{found}
+        </if>
+    </select>
+
+    <!--delete-->
+    <delete id="delete" parameterType="Find">
+        delete from find where 1=1
+        <if test="find_id!=null">
+            and find_id=#{find_id}
+        </if>
+        <if test="user_id!=null">
+            and user_id=#{user_id}
+        </if>
+        <if test="pet_id!=null">
+            and pet_id=#{pet_id}
+        </if>
+        <if test="from_date!=null">
+            and from_date=#{from_date}
+        </if>
+        <if test="to_date!=null">
+            and to_date=#{to_date}
+        </if>
+        <if test="reward!=null">
+            and reward=#{reward}
+        </if>
+        <if test="reward_value!=null">
+            and reward_value=#{reward_value}
+        </if>
+        <if test="reward_others!=null">
+            and reward_others=#{reward_others}
+        </if>
+        <if test="remark!=null">
+            and remark=#{remark}
+        </if>
+        <if test="found!=null">
+            and found=#{found}
+        </if>
+    </delete>
+</mapper>
