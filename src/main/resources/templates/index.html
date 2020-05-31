@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>首页</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content=""/>
+    <!--// Meta tag Keywords -->
+    <!-- css files -->
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="./css/user/font-awesome.css" type="text/css" media="all">
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="./css/user/owl.carousel.css" type="text/css" media="all" />
+    <!-- Owl-Carousel-CSS -->
+    <link rel="stylesheet" href="./css/user/style.css" type="text/css" media="all" />
+    <link href="http://fonts.googleapis.com/css?family=Molle:400i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+
+	<!-- Owl-Carousel-CSS -->
+	<link rel="stylesheet" href="./css/user/style.css" type="text/css" media="all"/>
+</head>
+<body>
+<div class="nav-links">
+    <nav class='navbar navbar-default'>
+        <div class='container'>
+            <div class='collapse navbar-collapse'>
+                <ul>
+                    <li>
+                        <a href="index.html">主页</a>
+                    </li>
+                    <li>
+                        <a href="宠物百科.html">宠物知识</a>
+                    </li>
+                    <li>
+                        <a href="appoint.html">领养中心</a>
+                    </li>
+                    <li>
+                        <a href="寄养.html">寄养宠物</a>
+                    </li>
+                    <li>
+                        <a href="team.html">团队展示</a>
+                    </li>
+
+                    <!-- 判断是否登录 显示哪个内容 -->
+                        <li id="edit_logout">
+                            <div class="img"><img src="./images/user/${user.getPic()}" alt="" width="60px"
+                                                  style="border-radius:50% " value="${user.getId()}"
+                                                  id="user_edit_modal_btn"></div>
+                        </li>
+                        <a id="logout">退出</a>
+                        <li id="login_register">
+                            <button class="btn-primary btn-lg" data-toggle="modal" data-target="#login"
+                                    onclick="window.location='signIn.html'">注册/登录</button>
+                        </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<script type="text/javascript">
+</script>
+<!-- //sticky navigation 首页轮播图 -->
+<div class="w3l-main" id="home1">
+    <div class="container">
+        <!-- header -->
+        <div class="header">
+            <div class="logo">
+                <h1>
+                    <a href="#">
+                        <img class="logo-img center-block" src="./images/home/logo.png" height="130px" width="130px" alt="" /> 爱宠生活
+                    </a>
+                </h1>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- //header -->
+    </div>
+    <!-- Slider -->
+    <div class="slider">
+        <div class="callbacks_container">
+            <ul class="rslides" id="slider">
+                <li>
+                    <div class="slider-img-w3layouts one">
+                        <div class="w3l-overlay">
+                            <div class="container">
+                                <div class="banner-text-info">
+                                    <h3>我们随时
+                                        <span>欢迎</span> 你们来
+                                        <span>咨询</span>！
+                                    </h3>
+                                    <p> 全面的宠物护理指南，让您的宠物感受到您的爱</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="slider-img-w3layouts two">
+                        <div class="w3l-overlay">
+                            <div class="container">
+                                <div class="banner-text-info">
+                                    <h3>你可以展示你的
+                                        <span>爱</span> 向你
+                                        <span>的宠物</span>!</h3>
+                                    <p> 全面的宠物护理指南，让您的宠物感受到您的爱</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="slider-img-w3layouts three">
+                        <div class="w3l-overlay">
+                            <div class="container">
+                                <div class="banner-text-info">
+                                    <h3>宠物 是你的
+                                        <span>朋友</span>！&nbsp;&nbsp;宠物是你的
+                                        <span>家人</span> !</h3>
+                                    <p> 全面的宠物护理指南，让您的宠物感受到您的爱</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="slider-img-w3layouts four">
+                        <div class="w3l-overlay">
+                            <div class="container">
+                                <div class="banner-text-info">
+                                    <h3>宠物如此
+                                        <span>可爱</span> 你们怎么可能
+                                        <span>不爱</span>它们!</h3>
+                                    <p>全面的宠物护理指南，让您的宠物感受到您的爱</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--//Slider-->
+</div>
+<!--//banner-->
+<!-- footer -->
+<section class="footer-w3">
+    <div class="container">
+        <div class="col-lg-4 col-md-4 col-sm-4 footer-agile1" data-aos="zoom-in">
+            <h3>网站简介</h3>
+            <p class="footer-p1">
+                该网站是用于想领养宠物和想成为我们其中一员，那么你将再这里实现你的想法。
+                如果你是领养者，请认真选取想要领养的宠物领养后，请认真负责对待可爱的猫狗！
+                如果你是想成为志愿者，请联系我们，我们欢迎任何爱心认识，加入我们！
+            </p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 footer-mid-w3" data-aos="zoom-in">
+            <h3>宠物展示</h3>
+            <div class="agileinfo_footer_grid1">
+                <a href="#">
+                    <img src="./images/home/f1.jpg" alt=" " class="img-responsive">
+                </a>
+            </div>
+            <div class="agileinfo_footer_grid1">
+                <a href="#">
+                    <img src="./images/home/f2.jpg" alt=" " class="img-responsive">
+                </a>
+            </div>
+            <div class="agileinfo_footer_grid1">
+                <a href="#">
+                    <img src="./images/home/f3.jpg" alt=" " class="img-responsive">
+                </a>
+            </div>
+            <div class="agileinfo_footer_grid1">
+                <a href="#">
+                    <img src="./images/home/f4.jpg" alt=" " class="img-responsive">
+                </a>
+            </div>
+            <div class="agileinfo_footer_grid1">
+                <a href="#">
+                    <img src="./images/home/f5.jpg" alt=" " class="img-responsive">
+                </a>
+            </div>
+            <div class="agileinfo_footer_grid1">
+                <a href="#">
+                    <img src="./images/home/f6.jpg" alt=" " class="img-responsive">
+                </a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!--联系方式-->
+        <div class="col-lg-4 col-md-4 col-sm-4 footer-agile1" data-aos="zoom-in">
+            <h3>联系方式</h3>
+            <p>电话&nbsp;&nbsp;<span style="font-size: 22px;color: red">*******</span></p>
+            <br>
+            <p>邮件&nbsp;&nbsp;<span style="font-size: 22px;color: red">******</span></p>
+            <br>
+            <p>官网&nbsp;&nbsp;<span style="font-size: 22px;color: red">*****</span></p>
+            <br>
+            <p><a href="./admin/login.html">管理员登录</a></p>
+        </div>
+
+    </div>
+
+</section>
+
+<script src="./js/user/jquery-2.2.3.min.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<!-- Necessary-JavaScript-File-For-Bootstrap -->
+<!-- //js -->
+
+<!-- Banner Slider -->
+<script src="./js/user/responsiveslides.min.js"></script>
+<script>
+    $(function () {
+        $("#slider").responsiveSlides({
+            auto: true,
+            pager: true,
+            nav: true,
+            speed: 1000,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+    });
+
+</script>
+<!-- //Banner Slider -->
+
+</body>
+</html>
+

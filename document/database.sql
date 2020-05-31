@@ -213,14 +213,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`message` (
   `content` VARCHAR(1024) NOT NULL,
   PRIMARY KEY (`message_id`),
   INDEX `FK_sender_idx` (`sender_id` ASC) VISIBLE,
-  INDEX `FK_receiver_idx` (`reciever_id` ASC) VISIBLE,
+  INDEX `FK_receiver_idx` (`receiver_id` ASC) VISIBLE,
   CONSTRAINT `FK_message_sender`
     FOREIGN KEY (`sender_id`)
     REFERENCES `mydb`.`user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_message_receiver`
-    FOREIGN KEY (`reciever_id`)
+    FOREIGN KEY (`receiver_id`)
     REFERENCES `mydb`.`user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
