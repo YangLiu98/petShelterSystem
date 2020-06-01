@@ -92,4 +92,47 @@
             and status=#{status}
         </if>
     </delete>
+
+    <!--update to pass-->
+    <update id="update" parameterType="Feed">
+        update feed set pass=true where feed_id=#{feed_id}
+    </update>
+
+    <!--delete Admin-->
+    <delete id="deleteAdmin" parameterType="Feed">
+        delete from feed where 1=1
+        <if test="feed_id!=null">
+            and feed_id=#{feed_id}
+        </if>
+        <if test="user_id!=null">
+            and user_id=#{user_id}
+        </if>
+        <if test="pet_id!=null">
+            and pet_id=#{pet_id}
+        </if>
+        <if test="from_date!=null">
+            and from_date=#{from_date}
+        </if>
+        <if test="to_date!=null">
+            and to_date=#{to_date}
+        </if>
+        <if test="remark!=null">
+            and remark=#{remark}
+        </if>
+        <if test="passed!=null">
+            and passed=#{passed}
+        </if>
+        <if test="pass_date!=null">
+            and pass_date=#{pass_date}
+        </if>
+        <if test="contracted!=null">
+            and contracted=#{contracted}
+        </if>
+        <if test="contract!=null">
+            and contract=#{contract}
+        </if>
+        <if test="status!=null">
+            and status=#{status}
+        </if>
+    </delete>
 </mapper>

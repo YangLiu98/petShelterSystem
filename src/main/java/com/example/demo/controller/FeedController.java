@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Appointment;
 import com.example.demo.entity.Feed;
 import com.example.demo.service.FeedService;
 import com.example.demo.util.annotation.NeedToken;
@@ -70,5 +71,25 @@ public class FeedController extends BaseController{
         System.out.println(feed);
         feed.setUser_id(operator);
         return feedService.delete(feed);
+    }
+
+    /*该方法用于审批指定id预约通过
+     *操作权限：Admin
+     */
+    @NeedToken(function=NeedToken.Admin)
+    @PostMapping("setPass")
+    public ResponseEntity<String> setPass(@RequestBody Feed feed){
+        System.out.println(feed);
+        return feedService.update(feed);
+    }
+
+    /*该方法用于删除代养
+     *操作权限：Admin
+     */
+    @NeedToken(function=NeedToken.Admin)
+    @PostMapping("deleteAdmin")
+    public ResponseEntity<Integer> deleteAdmin(@RequestBody Feed feed){
+        System.out.println(feed);
+        return feedService.deleteAdmin(feed);
     }
 }

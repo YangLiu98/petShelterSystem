@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.Feed;
-import com.example.demo.entity.Message;
 
 import java.util.List;
 import java.util.Map;
@@ -16,4 +15,8 @@ public interface FeedDao {
     public List<Map<String,Object>> select(Feed feed);
 
     public int delete(Feed feed);
+
+    public int update(Feed feed);
+
+    public int deleteAdmin(Feed feed);
 }

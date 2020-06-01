@@ -48,4 +48,18 @@ public class FindServiceImpl implements FindService {
         }
         return ResponseFactory.badRequest("Fail to delete");
     }
+
+    @Override
+    public ResponseEntity<String> update(Find find) {
+        int count=findDao.update(find);
+        if(count>0){
+            return ResponseFactory.success("Success to update");
+        }
+        return ResponseFactory.badRequest("Fail to update");
+    }
+
+    @Override
+    public ResponseEntity<Integer> deleteAdmin(Find find) {
+        return ResponseFactory.success(findDao.deleteAdmin(find));
+    }
 }

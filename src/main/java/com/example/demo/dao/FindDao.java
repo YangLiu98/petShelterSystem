@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.entity.Feed;
 import com.example.demo.entity.Find;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface FindDao {
     public List<Map<String,Object>> select(Find find);
 
     public int delete(Find find);
+
+    public int update(Find find);
+
+    public int deleteAdmin(Find find);
 }
