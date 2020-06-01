@@ -22,7 +22,7 @@
 	<!-- Owl-Carousel-CSS -->
 	<link rel="stylesheet" href="./css/user/style.css" type="text/css" media="all"/>
 </head>
-<body>
+<body onload="getAnimal()">
 <div class="nav-links">
     <nav class='navbar navbar-default'>
         <div class='container'>
@@ -231,6 +231,23 @@
             }
         });
     });
+    function getAnimal() {
+
+            var xhr = new XMLHttpRequest();
+            var animalInformation;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+
+                    sessionStorage.setItem("animalInformation",xhr.responseText);
+                }
+            }
+
+            url="http://localhost:8989/petshelter/pet/all"
+            xhr.open("post", url, true)
+            xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+            xhr.send();
+
+    }
 
 </script>
 <!-- //Banner Slider -->
