@@ -48,4 +48,18 @@ public class FeedServiceImpl implements FeedService{
         }
         return ResponseFactory.badRequest("Fail to delete");
     }
+
+    @Override
+    public ResponseEntity<String> update(Feed feed) {
+        int count=feedDao.update(feed);
+        if(count>0){
+            return ResponseFactory.success("Success to update");
+        }
+        return ResponseFactory.badRequest("Fail to update");
+    }
+
+    @Override
+    public ResponseEntity<Integer> deleteAdmin(Feed feed) {
+        return ResponseFactory.success(feedDao.deleteAdmin(feed));
+    }
 }

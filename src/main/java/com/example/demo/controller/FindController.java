@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Feed;
 import com.example.demo.entity.Find;
 import com.example.demo.service.FindService;
 import com.example.demo.util.annotation.NeedToken;
@@ -70,5 +71,25 @@ public class FindController extends BaseController{
         System.out.println(find);
         find.setUser_id(operator);
         return findService.delete(find);
+    }
+
+    /*该方法用于审批指定id预约通过
+     *操作权限：Admin
+     */
+    @NeedToken(function=NeedToken.Admin)
+    @PostMapping("setPass")
+    public ResponseEntity<String> setPass(@RequestBody Find find){
+        System.out.println(find);
+        return findService.update(find);
+    }
+
+    /*该方法用于删除代养
+     *操作权限：Admin
+     */
+    @NeedToken(function=NeedToken.Admin)
+    @PostMapping("deleteAdmin")
+    public ResponseEntity<Integer> deleteAdmin(@RequestBody Find find){
+        System.out.println(find);
+        return findService.deleteAdmin(find);
     }
 }

@@ -13,4 +13,8 @@ public interface FeedService {
     public ResponseEntity<List<Map<String, Object>>> allMyFeed(Feed feed);
 
     public ResponseEntity<String> delete(Feed feed);
+
+    public ResponseEntity<String> update(Feed feed);
+
+    public ResponseEntity<Integer> deleteAdmin(Feed feed);
 }

@@ -14,4 +14,7 @@ public interface FindService {
 
     public ResponseEntity<String> delete(Find find);
 
+    public ResponseEntity<String> update(Find find);
+
+    public ResponseEntity<Integer> deleteAdmin(Find find);
 }

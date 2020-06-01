@@ -86,4 +86,44 @@
             and found=#{found}
         </if>
     </delete>
+
+    <!--update to pass-->
+    <update id="update" parameterType="Find">
+        update feed set found=1 where find_id=#{find_id}
+    </update>
+
+    <!--delete Admin-->
+    <delete id="deleteAdmin" parameterType="find">
+        delete from find where 1=1
+        <if test="find_id!=null">
+            and find_id=#{find_id}
+        </if>
+        <if test="user_id!=null">
+            and user_id=#{user_id}
+        </if>
+        <if test="pet_id!=null">
+            and pet_id=#{pet_id}
+        </if>
+        <if test="from_date!=null">
+            and from_date=#{from_date}
+        </if>
+        <if test="to_date!=null">
+            and to_date=#{to_date}
+        </if>
+        <if test="reward!=null">
+            and reward=#{reward}
+        </if>
+        <if test="reward_value!=null">
+            and reward_value=#{reward_value}
+        </if>
+        <if test="reward_others!=null">
+            and reward_others=#{reward_others}
+        </if>
+        <if test="remark!=null">
+            and remark=#{remark}
+        </if>
+        <if test="found!=null">
+            and found=#{found}
+        </if>
+    </delete>
 </mapper>
