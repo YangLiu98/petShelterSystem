@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>动物的具体信息</title>
+    <style type="text/css">
+        .myDiv {
+            margin-top: 40px;
+        }
+    </style>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <link href="./css/user/jquery.slideBox.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="./css/user/show.css">
+    <script src="./js/user/jquery-2.2.3.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.js"></script>
+    <script src="./js/user/jquery.comment.js"></script>
+</head>
+<body onload="AddModel()">
+<div class="myDiv">
+    <div>
+        <h2>待领养的动物</h2>
+        <center>
+            <div id="demo1" class="slideBox">
+                <ul class="items">
+                        <li>
+                            <a href=""><img class="my-img" src="./images/animal/cat1_1.jpg"></a>
+                        </li>
+                </ul>
+            </div>
+            <div class="name">
+                <img src="./images/adopt/p1.jpg" height="50px" width="50px">
+                <span>我叫 maomao</span>
+            </div>
+        </center>
+        <div class="animal">
+            <div class="group">
+                <div class="animalX1">
+                    <img src="./images/adopt/p2.jpg"><span>编号</span><br>
+
+                </div>
+                <div class="animalX2">
+                    <img src="./images/adopt/p3.jpg"><span>生日</span><br>
+
+                </div>
+            </div>
+            <div class="group">
+                <div class="animalX3">
+                    <img src="./images/adopt/p4.jpg"><span>品种</span><br>
+
+                </div>
+                <div class="animalX4">
+                    <img src="./images/adopt/p5.jpg"><span>性别</span><br>
+
+                </div>
+            </div>
+        </div>
+        <div class="animal_me">
+            <div class="animal_me1">
+                <img src="./images/adopt/p6.jpg">
+                <img src="./images/adopt/p7.jpg">
+                <img src="./images/adopt/p8.jpg">
+                <img src="./images/adopt/p9.jpg">
+                <img src="./images/adopt/p10.jpg">
+            </div>
+            <div class="animal_me2"><p>大家好，我是***。你能带我回家吗？</p></div>
+            <div class="animal_me3"><img src="./images/adopt/p11.jpg"></div>
+        </div>
+        <div class="my_btn">
+            <button class="btn btn-primary btn-lg" id="pet_adopt_modal_btn">预约领养</button>
+            <button class="btn btn-primary btn-lg" id="tianchuan_btn"
+                    style="float: right;position: relative;left: 150px;bottom: 45px">返回中心
+            </button>
+        </div>
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myAdopt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        请确认个人信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="new_adopt_form">
+                        <input type="hidden" value="${user.id}" name="id">
+
+                        <div class="form-group">
+                            <label for="new_petName" class="col-sm-2 control-label">
+                                宠物id： </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="new_petName"
+                                       placeholder="petName" name="petName" value="" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_Name" class="col-sm-2 control-label">
+                                预约日期： </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="new_Date"
+                                       placeholder="userName" name="userName" value="" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_tel" class="col-sm-2 control-label">
+                                联系方式： </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="new_tel"
+                                       placeholder="telephone" name="telephone" value="">
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="adopt_btn">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="submit_btn" onclick="submit_appoint()">提交申请</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</div>
+
+
+<script>
+    function input_set(){
+        var number = sessionStorage.getItem("animal_id");
+        var animalInformation=eval( sessionStorage.getItem("animalInformation"));
+        let a1 = document.getElementById("new_petName");
+        a_1.value(animalInformation[number]['pet_id']);
+    }
+    function AddModel(){
+        var number = sessionStorage.getItem("animal_id");
+        console.log(number);
+        var animalInformation=eval( sessionStorage.getItem("animalInformation"));
+        let a1 = document.getElementsByClassName("animalX1")[0];
+        let a2 = document.getElementsByClassName("animalX2")[0];
+        let a3 = document.getElementsByClassName("animalX3")[0];
+        let a4 = document.getElementsByClassName("animalX4")[0];
+        let a_1 =document.createElement("p");
+        let a_2 =document.createElement("p");
+        let a_3 =document.createElement("p");
+        let a_4 =document.createElement("p");
+        if(animalInformation[number]['pet_id']){
+        a_1.textContent=animalInformation[number]['pet_id'];}
+        else {
+            a_1.textContent="***";
+        }
+        if(animalInformation[number]['birthday']){
+            a_2.textContent=animalInformation[number]['birthday'];
+        }else{
+            a_2.textContent="***";
+        }
+        if(animalInformation[number]['species']){
+            a_3.textContent=animalInformation[number]['species'];
+        }else{
+            a_3.textContent="***";
+        }
+        if(animalInformation[number]['sex']){
+            a_4.textContent=animalInformation[number]['sex'];
+        }else{
+            a_4.textContent="***";
+        }
+        a1.appendChild(a_1);
+        a2.appendChild(a_2);
+        a3.appendChild(a_3);
+        a4.appendChild(a_4);
+
+    }
+    var user = "${sessionScope.user}";
+    var id = "${sessionScope.pet}";
+
+
+    //清空表单样式及内容
+    function reset_form(ele) {
+        $(ele)[0].reset();
+        //清空表单样式
+        $(ele).find("*").removeClass("has-error has-success");
+        $(ele).find(".help-block").text("");
+    }
+
+    //点击申请按钮弹出模态框。
+    $("#pet_adopt_modal_btn").click(function () {
+        //清除表单数据（表单完整重置（表单的数据，表单的样式））
+        reset_form("#new_adopt_form");
+        var number = sessionStorage.getItem("animal_id");
+        $("#new_petName").val(number);
+        //弹出模态框
+        $("#myAdopt").modal({
+            backdrop: "static"
+        });
+    });
+
+	function submit_appoint() {
+		var pet_id = document.getElementById("new_petName").value;
+		var appoint_time = document.getElementById("new_Date").value;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+                    window.location.href="appoint.html";
+				}
+			}
+        var data={
+				pet_id:pet_id,
+                appoint_time:appoint_time,
+			};
+        data= JSON.stringify(data);
+        url="http://localhost:8989/petshelter/appointment/appoint"
+        xhr.open("post", url, true)
+        xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+        console.log(localStorage.getItem("token"));
+        xhr.setRequestHeader("token",localStorage.getItem("token"));
+        xhr.send(data);
+
+	}
+    $("#tianchuan_btn").click(function () {
+        window.location.href = "./宠物社区.html";
+    });
+</script>
+</body>
+</html>
+
+
+

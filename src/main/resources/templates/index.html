@@ -38,10 +38,10 @@
                         <a href="appoint.html">领养中心</a>
                     </li>
                     <li>
-                        <a href="寄养.html">寄养宠物</a>
+                        <a href="foster.html">寄养宠物</a>
                     </li>
                     <li>
-                        <a href="team.html">团队展示</a>
+                        <a href="foster.html">个人预约</a>
                     </li>
 
                     <!-- 判断是否登录 显示哪个内容 -->
@@ -232,7 +232,6 @@
         });
     });
     function getAnimal() {
-
             var xhr = new XMLHttpRequest();
             var animalInformation;
             xhr.onreadystatechange = function() {
@@ -241,12 +240,10 @@
                     sessionStorage.setItem("animalInformation",xhr.responseText);
                 }
             }
-
             url="http://localhost:8989/petshelter/pet/all"
             xhr.open("post", url, true)
             xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
             xhr.send();
-
     }
 
 </script>

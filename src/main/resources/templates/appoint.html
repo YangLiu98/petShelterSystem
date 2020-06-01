@@ -40,10 +40,10 @@
                         <a href="appoint.html">领养中心</a>
                     </li>
                     <li>
-                        <a href="">资助宠物</a>
+                        <a href="foster.html">寄养宠物</a>
                     </li>
                     <li>
-                        <a href="">团队展示</a>
+                        <a href="">个人预约</a>
                     </li>
                         <li id="edit_logout">
                             <div class="img"><img src="./images/user/t0.jpg" alt="" width="60px"
@@ -77,8 +77,7 @@
     </div>
 </div >
     <div class="valuable" >
-        <!--准备删除-->
-        <img src="./images/1.png" width="400px" height="300px" display="block"/>
+
     </div>
 
 </div>
@@ -92,12 +91,17 @@
             for(var i=0;i<animalInformation.length;i++){
                 let a = document.getElementsByClassName("valuable")[0];
                 let img = document.createElement("img");
+                let a_2 =document.createElement("a");
                 // 设置大小和显示,不然图片大小会变成0 x 0;
                 img.src="./image/1.png";
                 img.style.width = "400px";
                 img.style.height = "300px";
                 img.style.display = "block";
+                a_2.text=animalInformation[i]['species'];
+                a_2.href="show.html";
+                sessionStorage.setItem("animal_id",i);
                 a.appendChild(img);
+                a.appendChild(a_2);
             }
             }
 

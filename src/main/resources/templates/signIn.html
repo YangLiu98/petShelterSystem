@@ -46,10 +46,9 @@
 				}
 			} else {
 				var xhr = new XMLHttpRequest();
-
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {
-
+						localStorage.setItem("token",xhr.responseText)
 						window.location.href="index.html";
 					}
 				}
