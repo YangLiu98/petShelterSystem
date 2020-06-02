@@ -53,4 +53,10 @@ public class UserServiceImpl implements  UserService{
     public User getUserByName(User user) {
         return userDao.selectByUserName(user);
     }
+
+    @Override
+    public User getUserById(User user) {
+        System.out.println(user);
+        return userDao.selectByUserId(user);
+    }
 }

@@ -48,13 +48,13 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             throw new RuntimeException(e);
         }
 
-        String username = claims.getSubject();
+        String user_id = claims.getSubject();
 
         //检测用户名
         User user=new User();
-        user.setUser_name(username);
-        user = userService.getUserByName(user);
-        if (user == null) throw new RuntimeException("No username: " + username);
+        user.setUser_id(Integer.parseInt(user_id));
+        user = userService.getUserById(user);
+        if (user == null) throw new RuntimeException("No user id: " + user_id);
 
         //检测权限（管理员）
         String function = needToken.function();

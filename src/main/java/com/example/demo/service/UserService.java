@@ -20,5 +20,8 @@ public interface UserService {
     //根据用户昵称查找
     public User getUserByName(User user);
 
+    //根据用户id查找
+    public User getUserById(User user);
+
 
 }

@@ -27,6 +27,11 @@
         select * from user where user_name=#{user_name} and is_admin=1
     </select>
 
+    <!--select by user_id-->
+    <select id="selectByUserId" parameterType="User" resultType="User">
+        select * from user where user_id=#{user_id}
+    </select>
+
 
 
 </mapper>

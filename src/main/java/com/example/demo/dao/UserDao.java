@@ -13,4 +13,6 @@ public interface UserDao {
     public User selectByPhone(User user);
 
     public User selectAdminByName(User user);
+
+    public User selectByUserId(User user);
 }
