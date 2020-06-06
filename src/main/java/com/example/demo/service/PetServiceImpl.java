@@ -50,7 +50,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public ResponseEntity<List<Map<String, Object>>> selectByTag(TagSet tagSet) {
+    public List<Map<String, Object>> selectByTag(TagSet tagSet) {
         List<Map<String, Object>> temp=petDao.selectByTag(tagSet);
         System.out.println(temp.size());
         ArrayList<Map<String, Object>> result=new ArrayList<>();
@@ -89,7 +89,7 @@ public class PetServiceImpl implements PetService {
                }
                result.get(i).remove("containNum");
         }
-        return ResponseFactory.success(temp);
+        return temp;
     }
 
     @Override

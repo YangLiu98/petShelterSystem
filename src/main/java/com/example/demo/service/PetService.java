@@ -22,7 +22,7 @@ public interface PetService {
     public ResponseEntity<List<Map<String,Object>>> select(Pet pet);
 
     //Tag查找
-    public ResponseEntity<List<Map<String,Object>>> selectByTag(TagSet tagSet);
+    public List<Map<String,Object>> selectByTag(TagSet tagSet);
 
     //更新宠物信息
     public ResponseEntity<String> update(Pet pet);

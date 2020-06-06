@@ -16,4 +16,6 @@ public class TagSet {
     private String tag3;
     private String tag4;
     private String tag5;
+
+    private String type;
 }

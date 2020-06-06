@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Pet;
 import com.example.demo.entity.TagSet;
 import com.example.demo.service.PetService;
+import com.example.demo.util.response.ResponseFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +52,17 @@ public class PetController {
     //该方法返回值已根据Tag相关度排序
     @PostMapping("selectByTag")
     public ResponseEntity<List<Map<String,Object>>> selectByTag(@RequestBody TagSet tagSet){
-        return petService.selectByTag(tagSet);
+        List<Map<String,Object>> temp= petService.selectByTag(tagSet);
+        if(tagSet.getType()!=null){
+            Iterator<Map<String,Object>> it = temp.iterator();
+            while(it.hasNext()){
+                Map<String,Object> x = it.next();
+                if(!x.get("type").toString().equals(tagSet.getType())){
+                    it.remove();
+                }
+            }
+        }
+        return ResponseFactory.success(temp);
     }
 
     //更新宠物信息
