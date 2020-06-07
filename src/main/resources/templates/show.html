@@ -137,6 +137,10 @@
         a_1.value(animalInformation[number]['pet_id']);
     }
     function AddModel(){
+        if (localStorage['token']!=null){
+            var v = document.getElementById("login_register");
+            v.style.visibility='hidden';
+        }
         var number = sessionStorage.getItem("animal_id");
         console.log(number);
         var animalInformation=eval( sessionStorage.getItem("animalInformation"));

@@ -232,6 +232,12 @@
         });
     });
     function getAnimal() {
+        console.log(localStorage['token'])
+            if (localStorage['token']!=null){
+
+                var v = document.getElementById("login_register");
+                v.style.visibility='hidden';
+            }
             var xhr = new XMLHttpRequest();
             var animalInformation;
             xhr.onreadystatechange = function() {
