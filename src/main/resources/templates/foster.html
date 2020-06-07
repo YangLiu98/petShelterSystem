@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!DOCTYPE html>
 <html lang="en">
@@ -20,9 +19,7 @@
     <div class="container">
         <h3 class="agile-title">寄养宠物</h3>
         <div class="team-agileinfo">
-
         </div>
-
     </div>
     <!-- 显示分页信息 -->
     <div class="row">
@@ -32,19 +29,18 @@
     </div>
 </div>
 
-user_id,pet_id,from_date,to_date,remark
 <!-- contact -->
 <div class="contact" id="contact">
     <div class="container">
         <div class="col-md-9 col-sm-9 contact-right">
             <form id="save_apply_form" >
-                <input type="text" id="from_date" name="name" placeholder="你的名字" >
+                <input type="text" id="name" name="name" placeholder="你的名字" >
                 <input type="text" id="email" name="email" placeholder="你的邮件号" >
-                <input type="text" id="age" name="age" placeholder="你的年龄">
-                <input type="text" id="telephone" name="telephone" placeholder="你的电话">
-                <textarea name="message" id="message" placeholder=你想当寄养的理由"></textarea>
+                <input type="text" id="from_date" name="age" placeholder="开始时间">
+                <input type="text" id="end_date" name="telephone" placeholder="结束时间">
+                <textarea name="message" id="reason" placeholder=你想当寄养的理由"></textarea>
             </form>
-            <button type="button" id="save_apply_btn">提交</button>
+            <button type="button" id="save_apply_btn" onclick="submit_request()">提交</button>
         </div>
         <div class="col-md-3 col-sm-3 contact-left">
             <div class="address">
@@ -72,14 +68,44 @@ user_id,pet_id,from_date,to_date,remark
         </div>
     </div>
 </div>
-
-
-
-
 <script type="text/javascript">
 
+    function submit_request() {
+        var user_id = document.getElementById("name").value;
+        var from_time = document.getElementById("from_date").value;
+        var end_time = document.getElementById("end_date").value;
+        var email = document.getElementById("email").value;
+        var reason = document.getElementById("reason").value;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert("提交成功");
+                window.location.href="appoint.html";
+            }
+        }
+        //今天的时间
+         var day2 = new Date();
+         day2.setTime(day2.getTime());
+        var s2 = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
+        //明天的时间
+        var day3 = new Date();
+        day3.setTime(day3.getTime()+24*60*60*1000);
+        var s3 = day3.getFullYear()+"-" + (day3.getMonth()+1) + "-" + day3.getDate();
+        var data={
+            user_id:user_id,
+            from_date:s2,
+            to_date:s3,
+            remark:reason
+        };
+        data= JSON.stringify(data);
+        url="http://localhost:8989/petshelter/feedment/feed"
+        xhr.open("post", url, true)
+        xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+        console.log(localStorage.getItem("token"));
+        xhr.setRequestHeader("token",localStorage.getItem("token"));
+        xhr.send(data);
 
-    var totalRecord,currentPage;
+    }
 
 </script>
 </body>
