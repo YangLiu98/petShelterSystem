@@ -22,8 +22,8 @@
 	<!-- Owl-Carousel-CSS -->
 	<link rel="stylesheet" href="./css/user/style.css" type="text/css" media="all"/>
 </head>
-<body onload="getAnimal()">
-<div class="nav-links">
+<body onload="getAnimal();getAppointments()">
+<div class="nav-links" >
     <nav class='navbar navbar-default'>
         <div class='container'>
             <div class='collapse navbar-collapse'>
@@ -41,15 +41,16 @@
                         <a href="foster.html">寄养宠物</a>
                     </li>
                     <li>
-                        <a href="foster.html">个人预约</a>
+                        <a href="user_appoint.html">个人预约</a>
                     </li>
 
                     <!-- 判断是否登录 显示哪个内容 -->
                         <li id="edit_logout">
-                            <div class="img"><img src="./images/user/${user.getPic()}" alt="" width="60px"
-                                                  style="border-radius:50% " value="${user.getId()}"
-                                                  id="user_edit_modal_btn"></div>
+                            <div class="img"><img src="./images/user/t0.jpg" alt="" width="60px"
+                                                  style="border-radius:50% " value=""
+                                                  id="user_edit_modal_btn" onclick="user_info()"></div>
                         </li>
+
                         <a id="logout">退出</a>
                         <li id="login_register">
                             <button class="btn-primary btn-lg" data-toggle="modal" data-target="#login"
@@ -216,6 +217,9 @@
 <!-- Banner Slider -->
 <script src="./js/user/responsiveslides.min.js"></script>
 <script>
+    function user_info(){
+        window.location.href="personal-info.html";
+    }
     $(function () {
         $("#slider").responsiveSlides({
             auto: true,
@@ -232,14 +236,16 @@
         });
     });
     function getAnimal() {
-        console.log(localStorage['token'])
+        console.log(localStorage['token']);
             if (localStorage['token']!=null){
-
                 var v = document.getElementById("login_register");
                 v.style.visibility='hidden';
             }
             var xhr = new XMLHttpRequest();
-            var animalInformation;
+            var type="收容宠物";
+            var data ={
+                type:type,
+            };
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
 
@@ -247,9 +253,27 @@
                 }
             }
             url="http://localhost:8989/petshelter/pet/all"
+
             xhr.open("post", url, true)
             xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
             xhr.send();
+    }
+
+    function getAppointments() {
+        var xhr = new XMLHttpRequest();
+        var animalInformation;
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                sessionStorage.setItem("appointInformation",xhr.responseText);
+            }
+        }
+        var data={};
+        url="http://localhost:8989/petshelter/appointment/allMyAppoint"
+        xhr.open("post", url, true)
+        xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+        xhr.setRequestHeader("token",localStorage.getItem("token"));
+        xhr.send(data);
     }
 
 </script>

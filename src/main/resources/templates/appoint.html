@@ -43,12 +43,12 @@
                         <a href="foster.html">寄养宠物</a>
                     </li>
                     <li>
-                        <a href="">个人预约</a>
+                        <a href="user_appoint.html">个人预约</a>
                     </li>
                         <li id="edit_logout">
                             <div class="img"><img src="./images/user/t0.jpg" alt="" width="60px"
                                                   style="border-radius:50% " value=""
-                                                  id="user_edit_modal_btn"></div>
+                                                  id="user_edit_modal_btn" onclick="user_info()"></div>
                         </li>
                         <a id="logout">退出</a>
                         <li id="login_register">
@@ -83,7 +83,14 @@
 </div>
 <script>
     function AddOrDelModel(){
+            console.log("进来");
+            if (localStorage['token']!=null){
+                console.log("进来");
+                var v = document.getElementById("login_register");
+                v.style.visibility='hidden';
+            }
             animalInformation=eval( sessionStorage.getItem("animalInformation"));
+        console.log("进来");
             console.log(sessionStorage.getItem("animalInformation"));
             console.log(animalInformation.length);
             console.log(animalInformation[0]);
@@ -108,6 +115,10 @@
                 a.appendChild(d);
             }
             }
+
+    function user_info(){
+        window.location.href="personal-info.html";
+    }
 
 </script>
 
