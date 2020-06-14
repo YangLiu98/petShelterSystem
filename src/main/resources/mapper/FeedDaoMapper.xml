@@ -4,7 +4,7 @@
 
     <!--insert-->
     <insert id="insert" parameterType="Feed">
-        insert into feed(user_id,pet_id,from_date,to_date,remark)values(#{user_id},#{pet_id},current_timestamp,#{to_date},#{remark})
+        insert into feed(user_id,pet_id,from_date,to_date,remark,contract)values(#{user_id},#{pet_id},current_timestamp,#{to_date},#{remark},#{contract})
     </insert>
 
     <!--select by Feedid-->
