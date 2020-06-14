@@ -7,13 +7,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
     <meta name="keywords" content=""/>
+<!--    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
+
+<!--    <link type="text/css" rel="stylesheet" href="searchBar.css">-->
+
     <script>
+        var countTag = 0;
+        var tags=new Array("","","","","");
+        function  addTag() {
+            var tagValue = document.myForm.searchBar.value;
+            var container = document.getElementById("container");
+            if(countTag!=5){
+                for(var i= 0; i < 5; i++){
+                    if (tags[i] == tagValue){
+                        tagValue = "";
+                        break;
+                    }
+                }
+                if(tagValue!= ""){
+                    for(var i= 0; i < 5; i++){
+                        if(tags[i] ==""){
+                            tags[i] = tagValue;
+                            var newDiv=document.createElement("div");
+                            var tag =document.createElement("input");
+                            tag.type = "button";
+                            tag.name = i;
+                            tag.value = tagValue;
+                            tag.onclick = function remo()
+                            {
+                                container.removeChild(newDiv);
+                                tags[tag.name]="";
+                                countTag --;
+                            };
+                            newDiv.appendChild(tag);
+                            container.appendChild(newDiv);
+                            countTag ++;
+                            document.getElementById("searchBar").value="";
+                            break;
+                        }
+
+                    }
+                }
+            }
+
+        }
+        // function showTags(){
+        //     alert(tags[0] + tags[1] + tags[2] + tags[3] + tags[4]);
+        // }
+        function search(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if(xhr.responseText != ""){
+                        //alert(","+xhr.responseText+",");
+                        //animalInformation=eval( sessionStorage.getItem("animalInformation"));
+                        document.getElementsByClassName("valuable")[0].innerHTML="";
+                        animalInformation=JSON.parse(xhr.responseText);
+                        for(var i=0;i<animalInformation.length;i++){
+                            let a = document.getElementsByClassName("valuable")[0];
+                            let d =  document.createElement("div");
+                            d.className="increase";
+                            d.style.float="left";
+                            let img = document.createElement("img");
+                            let a_2 =document.createElement("a");
+                            // 设置大小和显示,不然图片大小会变成0 x 0;
+                            img.src="./images/1.png";
+                            img.style.width = "400px";
+                            img.style.height = "300px";
+                            img.style.display = "block";
+                            a_2.text=animalInformation[i]['species'];
+                            a_2.href="show.html";
+                            sessionStorage.setItem("animal_id",i);
+                            d.appendChild(img);
+                            d.appendChild(a_2);
+                            a.appendChild(d);
+                        }
+
+                    }
+                }
+            }
+            var data = {
+                tag1:tags[0],
+                tag2:tags[1],
+                tag3:tags[2],
+                tag4:tags[3],
+                tag5:tags[4],
+                //type:"收容宠物"
+            };
+            data = JSON.stringify(data);
+            url = "http://localhost:8989/petshelter/pet/selectByTag"
+            xhr.open("post", url, true)
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(data);
+        }
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
 
         function hideURLbar() {
             window.scrollTo(0, 1);
+        }
+
+        function AddOrDelModel(){
+            //console.log("进来");
+            // if (localStorage['token']!=null){
+            //     var v = document.getElementById("login_register");
+            //     v.style.visibility='hidden';
+            // }
+            // animalInformation=eval( sessionStorage.getItem("animalInformation"));
+            // for(var i=0;i<animalInformation.length;i++){
+            //     let a = document.getElementsByClassName("valuable")[0];
+            //     let d =  document.createElement("div");
+            //     d.className="increase";
+            //     d.style.float="left";
+            //     let img = document.createElement("img");
+            //     let a_2 =document.createElement("a");
+            //     // 设置大小和显示,不然图片大小会变成0 x 0;
+            //     img.src="./images/1.png";
+            //     img.style.width = "400px";
+            //     img.style.height = "300px";
+            //     img.style.display = "block";
+            //     a_2.text=animalInformation[i]['species'];
+            //     a_2.href="show.html";
+            //     sessionStorage.setItem("animal_id",i);
+            //     d.appendChild(img);
+            //     d.appendChild(a_2);
+            //     a.appendChild(d);
+            // }
+        }
+
+        function user_info(){
+            window.location.href="personal-info.html";
         }
     </script>
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.css" type="text/css" media="all">
@@ -24,7 +148,8 @@
     <script src="./bootstrap/js/bootstrap.min.js"></script>
 
 </head>
-<body onload="AddOrDelModel()">
+<body onload="search()">
+
 <div class="nav-links">
     <nav class='navbar navbar-default'>
         <div class='container'>
@@ -65,6 +190,22 @@
 <div class="services" id="services">
     <div class="container">
         <h3 class="agile-title">领养中心</h3>
+
+        <div id="container">
+            <!--    <input type="button" onclick="showTags()" value="展示现在的tag" />-->
+
+<!--            <div class="search bar7">-->
+                <form name="myForm">
+                    <input id="searchBar" type="text" name="searchBar" placeholder="请输入您要添加的标签...">
+                    <input type="button" onclick="addTag()" value="添加标签">
+                    <input type="button" onclick="search()" value="搜索宠物" />
+                    <br/>
+                    <label>(点击已添加的标签即可删除该标签)</label>
+                </form>
+<!--            </div>-->
+
+
+        </div>
         <div class="w3_agile_services_grids">
         </div>
     </div>
@@ -81,46 +222,7 @@
     </div>
 
 </div>
-<script>
-    function AddOrDelModel(){
-            console.log("进来");
-            if (localStorage['token']!=null){
-                console.log("进来");
-                var v = document.getElementById("login_register");
-                v.style.visibility='hidden';
-            }
-            animalInformation=eval( sessionStorage.getItem("animalInformation"));
-        console.log("进来");
-            console.log(sessionStorage.getItem("animalInformation"));
-            console.log(animalInformation.length);
-            console.log(animalInformation[0]);
-            console.log(animalInformation[0]['color']);
-            for(var i=0;i<animalInformation.length;i++){
-                let a = document.getElementsByClassName("valuable")[0];
-                let d =  document.createElement("div");
-                d.className="increase";
-                d.style.float="left";
-                let img = document.createElement("img");
-                let a_2 =document.createElement("a");
-                // 设置大小和显示,不然图片大小会变成0 x 0;
-                img.src="./images/1.png";
-                img.style.width = "400px";
-                img.style.height = "300px";
-                img.style.display = "block";
-                a_2.text=animalInformation[i]['species'];
-                a_2.href="show.html";
-                sessionStorage.setItem("animal_id",i);
-                d.appendChild(img);
-                d.appendChild(a_2);
-                a.appendChild(d);
-            }
-            }
 
-    function user_info(){
-        window.location.href="personal-info.html";
-    }
-
-</script>
 
 </body>
 

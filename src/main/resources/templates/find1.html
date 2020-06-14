@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>领养搜索</title>
+    <script type="text/javascript">
+        function showOnePet() {
+            var temp =1;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                     alert(","+xhr.responseText+",");
+                }
+
+            }
+            var data = {
+                tag1:"黑色",
+                type:"收容宠物"
+            };
+            data = JSON.stringify(data);
+            url = "http://localhost:8989/petshelter/pet/selectByTag"
+            xhr.open("post", url, true)
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(data);
+
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="展示宠物" onclick="showOnePet()">
+</body>
+</html>

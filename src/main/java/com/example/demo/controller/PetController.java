@@ -36,7 +36,7 @@ public class PetController {
         return petService.getDetial(pet);
     }
 
-    //根据pet_id返回pet信息，未找到返回null
+    //返回所有宠物的信息
     @PostMapping("all")
     public ResponseEntity<List<Map<String,Object>>> getAll(){
         return petService.getAll();
