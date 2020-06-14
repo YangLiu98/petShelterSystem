@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8"/>
+    <title>宠物领养管理后台</title>
+    <!-- 引入css样式文件 -->
+    <!-- Bootstrap Core CSS -->
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="./css/admin/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="./css/admin/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="./css/admin/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="./css/admin/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./css/admin/boot-crm.css" rel="stylesheet" type="text/css">
+    <style>
+        .panel-heading {
+            background-color: #337ab7;
+            border-color: #2e6da4;
+            font-size: 14px;
+            padding-left: 20px;
+            height: 36px;
+            line-height: 36px;
+            color: white;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /*转成手形图标*/
+        .panel-heading span {
+            position: absolute;
+            right: 10px;
+            top: 12px;
+        }
+
+        .mySize {
+            width: 55px;
+            height: 65px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <!-- 导航栏部分 -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">流浪猫狗管理系统</a>
+        </div>
+        <!-- 导航栏右侧图标部分 -->
+        <!-- 导航栏右侧图标部分 -->
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- 消息通知 end -->
+            <!-- 用户信息和系统设置 start -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="/admin/developing">
+                    <i class="fa fa-user fa-fw"></i>
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user ">
+                    <li>
+                        <input type="hidden" id = "currentAdminId" value="${admin.id}">
+                    </li>
+                    <li><a href="/admin/developing"><i class="fa fa-user fa-fw"></i>
+                        管理员：${admin.adminName}</a>
+                    </li>
+                    <li><a href="/admin/developing"><i class="fa fa-gear fa-fw"></i> 系统设置</a></li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="${path}/admin/logout">
+                            <i class="fa fa-sign-out fa-fw"></i>退出登录
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 用户信息和系统设置结束 -->
+        </ul> <!-- 左侧显示列表部分 start-->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <!-- 教学管理  折叠的分组列表 -->
+                <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse"
+                     data-target="#collapseListGroup3" role="tab">
+                    <h4 class="panel-title">
+                        后台管理 <span class="fa fa-chevron-up right"></span>
+                    </h4>
+                </div>
+                <div id="collapseListGroup3" class="panel-collapse collapse in" role="tabpanel"
+                     aria-labelledby="collapseListGroupHeading3">
+                    <ul class="list-group">
+                        <li class="list-group-item my_font">
+                            <a href="user.html">
+                                <i class="fa fa-flash fa-fw"></i> 用户信息
+                            </a>
+                        </li>
+                        <li class="list-group-item my_font">
+                            <a href="admin.html">
+                                <i class="fa fa-flash fa-fw"></i> 管理员信息
+                            </a>
+                        </li>
+                        <li class="list-group-item my_font">
+                            <a href="pet.html">
+                                <i class="fa fa-sitemap fa-fw"></i> 宠物管理
+                            </a>
+                        </li>
+                        <li class="list-group-item my_font">
+                            <a href="adopt.html">
+                                <i class="fa fa-sitemap fa-fw"></i> 领养管理
+                            </a>
+                        </li>
+                        <li class="list-group-item my_font">
+                            <a href="agree.html">
+                                <i class="fa fa-sitemap fa-fw"></i> 同意领养列表
+                            </a>
+                        </li>
+                        <li class="list-group-item my_font">
+                            <a href="disAgree.html">
+                                <i class="fa fa-sitemap fa-fw"></i> 不同意领养列表
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- 左侧显示列表部分 end-->
+
+    </nav>
+    <!-- pet信息查询部分  start-->
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">宠物信息管理</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="panel panel-default">
+            <!-- 搜索部分 -->
+            <div class="panel-body">
+                <form class="form-inline" method="get" action="#">
+                    <div class="form-group">
+                        <label for="findByPetType">宠物类型</label>
+                        <input type="text" class="form-control" id="findByPetType" value="" name="petName">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="pet_find_modal_btn">查询</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+                    <!-- /.panel-heading -->
+                    <table class="table table-bordered table-striped" id="pet_table">
+                        <thead>
+                        <tr>
+
+                            <th>宠物编号</th>
+                            <th>种类</th>
+                            <th>性别</th>
+                            <th>生日</th>
+                            <th>领养状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <!--分页文字信息  -->
+                        <div class="col-md-8" id="page_info_area"></div>
+                        <!-- 分页条信息 -->
+                        <div class="col-md-4" id="page_nav_area"></div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- 班级列表查询部分  end-->
+</div>
+<!-- 创建宠物模态框 -->
+<div class="modal fade" id="newPet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">新建宠物信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="new_pet_form" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="new_petName" class="col-sm-2 control-label">
+                            宠物名
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="new_petName" placeholder="宠物名"
+                                   name="petName">
+                        </div>
+                        <label for="new_petType" class="col-sm-2 control-label">
+                            宠物类型
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="new_petType" placeholder="宠物类型"
+                                   name="petType">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_sex" class="col-sm-2 control-label">
+                            性别
+                        </label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="new_sex" name="sex">
+                                <option value="雄性">雄性</option>
+                                <option value="雌性">雌性</option>
+                            </select>
+                        </div>
+                        <label for="new_birthday" class="col-sm-2 control-label">
+                            生日
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" id="new_birthday" placeholder="生日"
+                                   name="birthday">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_state" class="col-sm-2 control-label">
+                            领养状态
+                        </label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="new_state" name="state">
+                                <option value="0">还未被申请领养</option>
+                                <option value="2">被领养</option>
+                                <option value="1">被申请领养</option>
+                            </select>
+                        </div>
+                        <label for="new_pic" class="col-sm-2 control-label">
+                            照片
+                        </label>
+                        <div class="col-sm-1">
+                            <input type="file" value="上传照片" id="new_pic" name="file">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_remark" class="col-sm-2 control-label">
+                            备注
+                        </label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="new_remark" placeholder="备注"
+                                      name="remark"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="pet_saveDown_btn">关闭</button>
+                <button type="button" class="btn btn-primary" id="pet_save_btn">提交宠物信息</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改宠物模态框 -->
+<div class="modal fade" id="editPet" tabindex="-1" role="dialog" aria-labelledby="myModalLabe">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabe">修改宠物信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="edit_pet_from" enctype="multipart/form-data">
+                    <input type="hidden" id="edit_id" name="id">
+                    <div class="form-group">
+                        <label for="edit_petName" class="col-sm-2 control-label">
+                            宠物名
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="edit_petName" placeholder="宠物名"
+                                   value="${pet.petName}"
+                                   name="petName">
+                        </div>
+                        <label for="edit_petType" class="col-sm-2 control-label">
+                            宠物类型
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="edit_petType" placeholder="宠物类型"
+                                   value="${pet.petType}"
+                                   name="petType">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_sex" class="col-sm-2 control-label">
+                            性别
+                        </label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="edit_sex" name="sex" value="${pet.sex}">
+                                <option value="雄性">雄性</option>
+                                <option value="雌性">雌性</option>
+                            </select>
+                        </div>
+                        <label for="edit_birthday" class="col-sm-2 control-label">
+                            生日
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" id="edit_birthday" placeholder="生日"
+                                   value="${pet.birthday}"
+                                   name="birthday">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_pic" class="col-sm-2 control-label">
+                            照片
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="file" id="edit_pic" value="${pet.pic}" name="file">
+                        </div>
+                        <label for="edit_state" class="col-sm-2 control-label">
+                            领养状态
+                        </label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="edit_state" value="${pet.state}" name="state">
+                                <option value="0">还未被申请领养</option>
+                                <option value="1">正在被申请领养</option>
+                                <option value="2">已经被人领养</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_remark" class="col-sm-2 control-label">
+                            备注
+                        </label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="edit_remark" placeholder="备注" value="${pet.remark}"
+                                      name="remark"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="pet_updateDown_btn">关闭</button>
+                <button type="button" class="btn btn-primary" id="pet_update_btn">保存修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="notlogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabe">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">登录失效</h4>
+            </div>
+            <div class="modal-body">
+                <p>请先
+                    <a href="/admin/login">登录</a>！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function AddModel(){
+        animalInformation=eval( sessionStorage.getItem("animalInformation"));
+        for(var i=0;i<appointInformation.length;i++){
+            let a = document.getElementById("pet_table");
+            let d =  document.createElement("tr");
+            d.className="inrease";
+
+            d.style.border="1px solid #ddd";
+            d.style.padding="8px";
+            d.style.lineHeight="1.42857143";
+            d.style.verticalAlign="top";
+            d.style.backgroundColor="#f5f5f5";
+
+            let a_2 =document.createElement("td");
+            a_2.style.border="1px solid #ddd";
+            let a_3 =document.createElement("td");
+            a_3.style.border="1px solid #ddd";
+            let a_4 =document.createElement("td");
+            a_4.style.border="1px solid #ddd";
+            let a_5 =document.createElement("td");
+            a_5.style.border="1px solid #ddd";
+            let a_6 =document.createElement("td");
+            a_6.style.border="1px solid #ddd";
+
+            a_2.textContent =appointInformation[i]['appointment_id'];
+            a_3.textContent=appointInformation[i]['pet_id'];
+            a_4.textContent=appointInformation[i]['date'];
+            var pet_id=appointInformation[i]['pet_id'];
+            a_5.textContent=animalInformation[pet_id]['species'];
+            var temp=appointInformation[i]['pass'];
+            console.log(typeof (temp));
+            if(temp==false){
+                a_6.textContent="未通过";
+
+            }else{
+                a_6.textContent="已通过";
+            }
+            d.appendChild(a_2);
+            d.appendChild(a_3);
+            d.appendChild(a_4);
+            d.appendChild(a_5);
+            d.appendChild(a_6);
+            a.appendChild(d);
+            console.log("创建成功");
+        }
+    }
+
+</script>
+
+</body>
+</html>
