@@ -133,11 +133,14 @@
         var day3 = new Date();
         day3.setTime(day3.getTime()+24*60*60*1000);
         var s3 = day3.getFullYear()+"-" + (day3.getMonth()+1) + "-" + day3.getDate();
+        var id=2;
         var data={
             user_id:user_id,
             from_date:from_time,
             to_date:end_time,
-            remark:reason
+            contract:email,
+            remark:reason,
+            pet_id:id,
         };
         data= JSON.stringify(data);
         url="http://localhost:8989/petshelter/feed/feed"

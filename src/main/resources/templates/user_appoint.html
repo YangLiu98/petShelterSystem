@@ -31,44 +31,60 @@
             width: 55px;
             height: 65px;
         }
+
     </style>
+    <!-- css files -->
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="./css/user/font-awesome.css" type="text/css" media="all">
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="./css/user/owl.carousel.css" type="text/css" media="all" />
+    <!-- Owl-Carousel-CSS -->
+    <link rel="stylesheet" href="./css/user/style.css" type="text/css" media="all" />
+    <link href="http://fonts.googleapis.com/css?family=Molle:400i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
 </head>
-<body>
-<div id="wrapper">
-    <!-- 导航栏部分 -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="">用户预约管理</a>
-        </div>
-        <!-- 导航栏右侧图标部分 -->
-        <!-- 导航栏右侧图标部分 -->
-        <ul class="nav navbar-top-links navbar-right">
-            <!-- 消息通知 end -->
-            <!-- 用户信息和系统设置 start -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="/admin/developing">
-                    <i class="fa fa-user fa-fw"></i>
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user ">
+<body onload="AddModel()">
+<div class="nav-links" >
+    <nav class='navbar navbar-default'>
+        <div class='container'>
+            <div class='collapse navbar-collapse'>
+                <ul>
                     <li>
-                        <input type="hidden" id = "currentAdminId" value="${admin.id}">
+                        <a href="index.html">主页</a>
                     </li>
-                    <li><a href="./admin/developing"><i class="fa fa-user fa-fw"></i>
-                        管理员：${admin.adminName}</a>
-                    </li>
-                    <li><a href="./admin/developing"><i class="fa fa-gear fa-fw"></i> 系统设置</a></li>
-                    <li class="divider"></li>
                     <li>
-                        <a href="${path}/admin/logout">
-                            <i class="fa fa-sign-out fa-fw"></i>退出登录
-                        </a>
+                        <a href="宠物百科.html">宠物知识</a>
                     </li>
+                    <li>
+                        <a href="appoint.html">领养中心</a>
+                    </li>
+                    <li>
+                        <a href="foster.html">寄养宠物</a>
+                    </li>
+                    <li>
+                        <a href="user_appoint.html">个人预约</a>
+                    </li>
+
+                    <!-- 判断是否登录 显示哪个内容 -->
+                    <li id="edit_logout">
+                        <div class="img"><img src="./images/user/t0.jpg" alt="" width="60px"
+                                              style="border-radius:50% " value=""
+                                              id="user_edit_modal_btn" onclick="user_info()"></div>
+                    </li>
+
+                    <a id="logout">退出</a>
+                    <li id="login_register">
+                        <button class="btn-primary btn-lg" data-toggle="modal" data-target="#login"
+                                onclick="window.location='signIn.html'">注册/登录</button>
+                    </li>
+
                 </ul>
-            </li>
-            <!-- 用户信息和系统设置结束 -->
-        </ul> <!-- 左侧显示列表部分 start-->
+            </div>
+        </div>
     </nav>
+</div>
+<div id="wrapper">
     <!-- pet信息查询部分  start-->
     <div id="page-wrapper">
         <div class="row">
@@ -89,8 +105,6 @@
                             <th>预约编号</th>
                             <th>宠物编号</th>
                             <th>预约日期</th>
-                            <th>性别</th>
-                            <th>生日</th>
                             <th>宠物类型</th>
                             <th>预约状态</th>
                         </tr>
@@ -286,22 +300,54 @@
             var v = document.getElementById("login_register");
             v.style.visibility='hidden';
         }
+        animalInformation=eval( sessionStorage.getItem("animalInformation"));
         appointInformation=eval( sessionStorage.getItem("appointInformation"));
-        console.log(sessionStorage.getItem("appointInformation"));
-        console.log(animalInformation.length);
-        console.log(animalInformation[0]['appointment_id']);
-        for(var i=0;i<animalInformation.length;i++){
-            let a = document.getElementsByClassName("valuable")[0];
-            let d =  document.createElement("div");
-            d.className="increase";
-            d.style.float="left";
-            let a_2 =document.createElement("a");
-            a_2.text=animalInformation[i]['species'];
-            a_2.href="show.html";
-            sessionStorage.setItem("animal_id",i);
-            d.appendChild(img);
+
+        for(var i=0;i<appointInformation.length;i++){
+            let a = document.getElementById("pet_table");
+            let d =  document.createElement("tr");
+            d.className="inrease";
+
+            d.style.border="1px solid #ddd";
+            d.style.padding="8px";
+            d.style.lineHeight="1.42857143";
+            d.style.verticalAlign="top";
+            d.style.backgroundColor="#f5f5f5";
+
+            let a_2 =document.createElement("td");
+            a_2.style.border="1px solid #ddd";
+            let a_3 =document.createElement("td");
+            a_3.style.border="1px solid #ddd";
+            let a_4 =document.createElement("td");
+            a_4.style.border="1px solid #ddd";
+            let a_5 =document.createElement("td");
+            a_5.style.border="1px solid #ddd";
+            let a_6 =document.createElement("td");
+            a_6.style.border="1px solid #ddd";
+
+            a_2.textContent =appointInformation[i]['appointment_id'];
+            a_3.textContent=appointInformation[i]['pet_id'];
+            a_4.textContent=appointInformation[i]['date'];
+            var pet_id=appointInformation[i]['pet_id'];
+            a_5.textContent=animalInformation[pet_id]['species'];
+            var temp=appointInformation[i]['pass'];
+            console.log(typeof (temp));
+            if(temp==false){
+                a_6.textContent="未通过";
+
+            }else{
+                a_6.textContent="已通过";
+            }
+
+
             d.appendChild(a_2);
+            d.appendChild(a_3);
+            d.appendChild(a_4);
+            d.appendChild(a_5);
+            d.appendChild(a_6);
+
             a.appendChild(d);
+            console.log("创建成功");
         }
     }
 

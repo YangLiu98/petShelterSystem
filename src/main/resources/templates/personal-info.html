@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="multipart/form-data; charset=utf-8"/>
+
+    <title>个人信息修改</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- bootstrap -->
+    <!-- bootstrap -->
+    <link href="./bootstrap/bootstrap/bootstrap.css" rel="stylesheet"/>
+    <link href="./bootstrap/bootstrap/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="./bootstrap/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet"/>
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="./static/css/user/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="./static/css/user/elements.css"/>
+    <link rel="stylesheet" type="text/css" href="./static/css/user/icons.css"/>
+
+    <link rel="stylesheet" href="./css/user/personal-info.css" type="text/css" media="screen"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+
+<div class="content wide-content">
+    <div class="container-fluid">
+        <div class="settings-wrapper" id="pad-wrapper">
+
+            <div class="span3 avatar-box">
+                <div class="personal-image">
+                    <img src="./images/host1.png" alt="" class="avatar img-circle" id="user_pic_modal_btn"/>
+                    <form id="update_file" style="display: none" enctype="multipart/form-data">
+                        <input type="file" name="file" id="myFile"/>
+                    </form>
+                </div>
+            </div>
+
+            <div class="span7 personal-info">
+                <h5 class="personal-title">个人信息修改</h5>
+                <form id="user_edit_form">
+                    <input type="hidden" id="edit_id" name="id" value="">
+                    <div class="field-box">
+                        <label>用户名:</label>
+                        <input type="text" class="span5 inline-input" id="edit_userName" placeholder="用户名称"
+                               name="userName" value=""/>
+                    </div>
+                    <div class="field-box">
+                        <label>密码:</label>
+                        <input type="password" class="span5 inline-input" id="edit_password" placeholder="用户密码"
+                               name="password" value=""/>
+                    </div>
+                    <div class="field-box">
+                        <label>年龄:</label>
+                        <input type="text" class="span5 inline-input" id="edit_age" placeholder="年龄" name="age"
+                               value=""/>
+                    </div>
+                    <div class="field-box">
+                        <label>性别:</label>
+                        <div class="ui-select">
+
+                            <select name="sex" id="edit_sex">
+                                <option value="1" selected="selected">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field-box">
+                        <label>电话密码:</label>
+                        <input type="text" class="span5 inline-input" id="edit_telephone" placeholder="电话"
+                               name="telephone" value=""/>
+                    </div>
+                    <div class="field-box">
+                        <label>Email:</label>
+                        <input type="text" class="span5 inline-input" id="edit_Email" placeholder="Email" name="Email"
+                               value=""/>
+                    </div>
+
+                    <div class="field-box">
+                        <label>地址:</label>
+                        <input type="text" class="span5 inline-input" id="edit_address" placeholder="地址" name="address"
+                               value=""/>
+                    </div>
+                    <div class="field-box">
+                        <label>有无领养经历:</label>
+                        <div class="ui-select">
+                            <select id="edit_state" name="state" value="">
+                                <option value="0">有领养经历</option>
+                                <option value="1">无领养经历</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="span6 field-box actions">
+                        <input type="button" class="btn-glow primary" value="提交修改" id="user_update_btn"/>
+                        <input type="button" class="btn-glow primary" value="返回主页" id="return_btn" onclick="return_i()"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function return_i() {
+        window.location.href="index.html";
+    }
+</script>
+</body>
+</html>

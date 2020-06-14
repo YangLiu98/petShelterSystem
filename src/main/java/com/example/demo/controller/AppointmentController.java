@@ -42,9 +42,9 @@ public class AppointmentController extends BaseController{
      */
     @NeedToken(function=NeedToken.Logged_User)
     @PostMapping("allMyAppoint")
-    public ResponseEntity<List<Map<String,Object>>> allMyAppoint(@RequestBody Appointment appointment){
+    public ResponseEntity<List<Map<String,Object>>> allMyAppoint(){
         Integer operator=getOperator();
-        System.out.println(appointment);
+        Appointment appointment=new Appointment();
         appointment.setUser_id(operator);
         return appointmentService.allMyAppoint(appointment);
     }
