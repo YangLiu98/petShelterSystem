@@ -267,8 +267,11 @@
             if (xhr.readyState == 4 && xhr.status == 200) {
                 sessionStorage.setItem("appointInformation",xhr.responseText);
             }
-        }
-        var data={};
+        };
+
+        var data={
+            user_id:0,
+        };
         url="http://localhost:8989/petshelter/appointment/allMyAppoint"
         xhr.open("post", url, true)
         xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
