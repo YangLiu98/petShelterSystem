@@ -10,6 +10,9 @@
     <link href="./css/admin/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="./css/admin/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="./css/admin/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./css/admin/boot-crm.css" rel="stylesheet" type="text/css">
     <style>
         .panel-heading{background-color: #337ab7;border-color: #2e6da4;font-size:14px;padding-left:20px;height:36px;line-height:36px;color:white;position:relative;cursor:pointer;}/*转成手形图标*/
         .panel-heading span{position:absolute;right:10px;top:12px;}
@@ -25,14 +28,12 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <!-- 教学管理  折叠的分组列表 -->
-                <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse"
-                     data-target="#collapseListGroup3" role="tab">
+                <div class="panel-heading" id="collapseListGroupHeading3" data-toggle="collapse" data-target="#collapseListGroup3" role="tab">
                     <h4 class="panel-title">
                         后台管理 <span class="fa fa-chevron-up right"></span>
                     </h4>
                 </div>
-                <div id="collapseListGroup3" class="panel-collapse collapse in" role="tabpanel"
-                     aria-labelledby="collapseListGroupHeading3">
+                <div id="collapseListGroup3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading3">
                     <ul class="list-group">
                         <li class="list-group-item my_font">
                             <a href="user.html">
@@ -74,7 +75,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">领养申请的审核</h1>
+                <h1 class="page-header">申请同意</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -84,34 +85,35 @@
             <div class="panel-body">
                 <form class="form-inline" method="get" action="">
                     <div class="form-group">
-                        <label for="findByAdoptTime">领养的时间</label>
-                        <input type="date" class="form-control" id="findByAdoptTime" value="" name="adoptTime">
+                        <label for="findByName">用户名称</label>
+                        <input type="text" class="form-control" id="findByName" value="" name="userName">
                     </div>
-                    <button type="button" class="btn btn-primary" id="adopt_find_modal_btn">查询</button>
+                    <button type="button" class="btn btn-primary" id="agree_find_modal_btn">查询</button>
                 </form>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-
-                    <!-- /.panel-heading -->
+                    <div class="panel-heading">领养信息列表</div>
                     <table class="table table-bordered table-striped" id="adopt_table">
                         <tr>
                             <th>编号</th>
                             <th>用户名称</th>
                             <th>宠物名字</th>
-                            <th>申请时间</th>
+                            <th>领养时间</th>
                             <th>状态</th>
-                            <th>操作</th>
+
                         </tr>
                     </table>
                 </div>
+                <!-- /.panel -->
             </div>
+            <!-- /.col-lg-12 -->
         </div>
     </div>
 </div>
-<!-- 编写js代码 -->
+
 <script type="text/javascript">
     function AddModel(){
         console.log("进入");
@@ -119,72 +121,38 @@
         var appointInformation=eval( sessionStorage.getItem("appointInformation"));
 
         for(var i=0;i<animalInformation.length;i++){
-            let a = document.getElementById("adopt_table");
-            let d =  document.createElement("tr");
-            d.className="inrease";
-
-            d.style.border="1px solid #ddd";
-            d.style.padding="8px";
-            d.style.lineHeight="1.42857143";
-            d.style.verticalAlign="top";
-            d.style.backgroundColor="#f5f5f5";
-
-            let a_2 =document.createElement("td");
-            a_2.style.border="1px solid #ddd";
-            let a_3 =document.createElement("td");
-            a_3.style.border="1px solid #ddd";
-            let a_4 =document.createElement("td");
-            a_4.style.border="1px solid #ddd";
-            let a_5 =document.createElement("td");
-            a_5.style.border="1px solid #ddd";
-            let a_6 =document.createElement("td");
-            a_6.style.border="1px solid #ddd";
-            let a_7 =document.createElement("td");
-            a_7.style.border="1px solid #ddd";
-            let b = document.createElement("button");
-            a_2.textContent =appointInformation[i]['appointment_id'];
-            a_3.textContent=appointInformation[i]['user_id'];
-            a_4.textContent=appointInformation[i]['pet_id'];
-            a_5.textContent=appointInformation[i]['date'];
-            var temp=appointInformation[i]['pass'];
-            if(temp==false){
+            console.log(appointInformation[i]['pass']);
+            if(appointInformation[i]['pass']==false){
+                let a = document.getElementById("adopt_table");
+                let d =  document.createElement("tr");
+                d.className="inrease";
+                d.style.border="1px solid #ddd";
+                d.style.padding="8px";
+                d.style.lineHeight="1.42857143";
+                d.style.verticalAlign="top";
+                d.style.backgroundColor="#f5f5f5";
+                let a_2 =document.createElement("td");
+                a_2.style.border="1px solid #ddd";
+                let a_3 =document.createElement("td");
+                a_3.style.border="1px solid #ddd";
+                let a_4 =document.createElement("td");
+                a_4.style.border="1px solid #ddd";
+                let a_5 =document.createElement("td");
+                a_5.style.border="1px solid #ddd";
+                let a_6 =document.createElement("td");
+                a_6.style.border="1px solid #ddd";
+                a_2.textContent =appointInformation[i]['appointment_id'];
+                a_3.textContent=appointInformation[i]['user_id'];
+                a_4.textContent=appointInformation[i]['pet_id'];
+                a_5.textContent=appointInformation[i]['date'];
                 a_6.textContent="未审核";
-            }else{
-                a_6.textContent="已审核";
-            }
-            b.textContent="审核";
-            b.id=appointInformation[i]['appointment_id'];;
-            b.onclick=function(){
-                pass_it(this)
-            };
-            a_7.appendChild(b);
-
-            d.appendChild(a_2);
-            d.appendChild(a_3);
-            d.appendChild(a_4);
-            d.appendChild(a_5);
-            d.appendChild(a_6);
-            d.appendChild(a_7);
-            a.appendChild(d);
-        }
-    }
-
-    function pass_it(obj){
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                window.location.href="admin.html"
-            }
-        }
-        var data={
-            appointment_id:obj.id,
-        };
-        data= JSON.stringify(data);
-        url="http://localhost:8989/petshelter/appointment/setPass"
-        xhr.open("post", url, true)
-        xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-        xhr.setRequestHeader("token",localStorage.getItem("admin"));
-        xhr.send(data);
+                d.appendChild(a_2);
+                d.appendChild(a_3);
+                d.appendChild(a_4);
+                d.appendChild(a_5);
+                d.appendChild(a_6);
+                a.appendChild(d);
+            }}
     }
 
 </script>

@@ -47,34 +47,6 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="">宠物领养管理系统</a>
         </div>
-        <!-- 导航栏右侧图标部分 -->
-        <!-- 导航栏右侧图标部分 -->
-        <ul class="nav navbar-top-links navbar-right">
-            <!-- 消息通知 end -->
-            <!-- 用户信息和系统设置 start -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="/admin/developing">
-                    <i class="fa fa-user fa-fw"></i>
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user ">
-                    <li>
-                        <input type="hidden" id = "currentAdminId" value="${admin.id}">
-                    </li>
-                    <li><a href="/admin/developing"><i class="fa fa-user fa-fw"></i>
-                        管理员：${admin.adminName}</a>
-                    </li>
-                    <li><a href="/admin/developing"><i class="fa fa-gear fa-fw"></i> 系统设置</a></li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="${path}/admin/logout">
-                            <i class="fa fa-sign-out fa-fw"></i>退出登录
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 用户信息和系统设置结束 -->
-        </ul> <!-- 左侧显示列表部分 start-->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <!-- 教学管理  折叠的分组列表 -->
@@ -151,13 +123,11 @@
                     <!-- /.panel-heading -->
                     <table class="table table-bordered table-striped" id="pet_table">
                         <tr>
-
                             <th>宠物编号</th>
                             <th>种类</th>
                             <th>性别</th>
                             <th>生日</th>
                             <th>领养状态</th>
-                            <th>操作</th>
                         </tr>
                     </table>
 
@@ -381,8 +351,7 @@
             a_5.style.border="1px solid #ddd";
             let a_6 =document.createElement("td");
             a_6.style.border="1px solid #ddd";
-            let a_7 =document.createElement("td");
-            a_7.style.border="1px solid #ddd";
+
 
             a_2.textContent =animalInformation[i]['pet_id'];
             a_3.textContent=animalInformation[i]['species'];
@@ -397,7 +366,6 @@
             }else{
                 a_6.textContent="已通过";
             }
-            a_7.textContent="待定";
 
             d.appendChild(a_2);
             d.appendChild(a_3);
