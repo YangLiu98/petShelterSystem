@@ -251,7 +251,8 @@
                 v.style.visibility='hidden';
             }
             else{
-                window.location.href="signIn.html";
+                var myurl="signIn.html"+"?"+"0";
+                window.location.assign(encodeURI(myurl));
             }
             var xhr = new XMLHttpRequest();
             var type="收容宠物";

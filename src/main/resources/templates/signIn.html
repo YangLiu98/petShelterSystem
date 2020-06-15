@@ -38,7 +38,7 @@
 		function show() {
 			var url=location.href;
 			var tmp1=url.split("?")[1];
-			alert(tmp1);
+			alert(decodeURI(tmp1));
 			var user_id = document.getElementById("user_id").value;
 			var password = document.getElementById("password").value;
 			if (user_id == "" || password == "") {
@@ -51,7 +51,7 @@
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {
-						if(tmp1==0){
+						if(decodeURI(tmp1)==0){
 						localStorage.setItem("token",xhr.responseText)
 						window.location.href="index.html";}
 						else{
