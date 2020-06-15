@@ -54,10 +54,10 @@
                         <a href="index.html">主页</a>
                     </li>
                     <li>
-                        <a href="宠物百科.html">宠物知识</a>
+                        <a href="find.html">寻宠启示</a>
                     </li>
                     <li>
-                        <a href="appoint.html">领养中心</a>
+                        <a href="appoint.html">预约中心</a>
                     </li>
                     <li>
                         <a href="foster.html">寄养宠物</a>
@@ -173,13 +173,13 @@
                     </div>
                     <div class="form-group">
                         <label for="new_state" class="col-sm-2 control-label">
-                            领养状态
+                            预约状态
                         </label>
                         <div class="col-sm-4">
                             <select class="form-control" id="new_state" name="state">
-                                <option value="0">还未被申请领养</option>
-                                <option value="2">被领养</option>
-                                <option value="1">被申请领养</option>
+                                <option value="0">还未被申请预约</option>
+                                <option value="2">被预约</option>
+                                <option value="1">被申请预约</option>
                             </select>
                         </div>
                         <label for="new_pic" class="col-sm-2 control-label">
@@ -265,13 +265,13 @@
                             <input type="file" id="edit_pic" value="${pet.pic}" name="file">
                         </div>
                         <label for="edit_state" class="col-sm-2 control-label">
-                            领养状态
+                            预约状态
                         </label>
                         <div class="col-sm-4">
                             <select class="form-control" id="edit_state" value="${pet.state}" name="state">
-                                <option value="0">还未被申请领养</option>
-                                <option value="1">正在被申请领养</option>
-                                <option value="2">已经被人领养</option>
+                                <option value="0">还未被申请预约</option>
+                                <option value="1">正在被申请预约</option>
+                                <option value="2">已经被人预约</option>
                             </select>
                         </div>
                     </div>

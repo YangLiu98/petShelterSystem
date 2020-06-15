@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>领养中心</title>
+    <title>预约中心</title>
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
     <meta name="keywords" content=""/>
-<!--    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
-
-<!--    <link type="text/css" rel="stylesheet" href="searchBar.css">-->
 
     <script>
         var countTag = 0;
@@ -51,16 +48,21 @@
             }
 
         }
-        // function showTags(){
-        //     alert(tags[0] + tags[1] + tags[2] + tags[3] + tags[4]);
-        // }
-        function search(){
+
+        function search1(){
+            if (localStorage['token']!=null){
+                var v = document.getElementById("login_register");
+                v.style.visibility='hidden';
+            }
+            else{
+              window.location.href="index.html";
+            }
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     if(xhr.responseText != ""){
                         //alert(","+xhr.responseText+",");
-                        //animalInformation=eval( sessionStorage.getItem("animalInformation"));
+                        //animalInformation=eval(sessionStorage.getItem("animalInformation"));
                         document.getElementsByClassName("valuable")[0].innerHTML="";
                         animalInformation=JSON.parse(xhr.responseText);
                         for(var i=0;i<animalInformation.length;i++){
@@ -71,11 +73,11 @@
                             let img = document.createElement("img");
                             let a_2 =document.createElement("a");
                             // 设置大小和显示,不然图片大小会变成0 x 0;
-                            img.src="./images/1.png";
-                            img.style.width = "400px";
-                            img.style.height = "300px";
+                            img.src="./images/" + animalInformation[i]['pic']+ ".jpg";
+                            // img.style.width = "400px";
+                            // img.style.height = "300px";
                             img.style.display = "block";
-                            a_2.text=animalInformation[i]['species'];
+                            a_2.text=animalInformation[i]['breed'];
                             a_2.href="show.html";
                             sessionStorage.setItem("animal_id",i);
                             d.appendChild(img);
@@ -108,36 +110,36 @@
             window.scrollTo(0, 1);
         }
 
-        function AddOrDelModel(){
-            //console.log("进来");
-            // if (localStorage['token']!=null){
-            //     var v = document.getElementById("login_register");
-            //     v.style.visibility='hidden';
-            // }
-            //else{
-             //   window.location.href="index.html";
-            //}
-            // animalInformation=eval( sessionStorage.getItem("animalInformation"));
-            // for(var i=0;i<animalInformation.length;i++){
-            //     let a = document.getElementsByClassName("valuable")[0];
-            //     let d =  document.createElement("div");
-            //     d.className="increase";
-            //     d.style.float="left";
-            //     let img = document.createElement("img");
-            //     let a_2 =document.createElement("a");
-            //     // 设置大小和显示,不然图片大小会变成0 x 0;
-            //     img.src="./images/1.png";
-            //     img.style.width = "400px";
-            //     img.style.height = "300px";
-            //     img.style.display = "block";
-            //     a_2.text=animalInformation[i]['species'];
-            //     a_2.href="show.html";
-            //     sessionStorage.setItem("animal_id",i);
-            //     d.appendChild(img);
-            //     d.appendChild(a_2);
-            //     a.appendChild(d);
-            // }
-        }
+        // function AddOrDelModel(){
+        //     console.log("进来");
+        //     if (localStorage['token']!=null){
+        //         var v = document.getElementById("login_register");
+        //         v.style.visibility='hidden';
+        //     }
+        //     else{
+        //        window.location.href="index.html";
+        //     }
+        //     animalInformation=eval( sessionStorage.getItem("animalInformation"));
+        //     for(var i=0;i<animalInformation.length;i++){
+        //         let a = document.getElementsByClassName("valuable")[0];
+        //         let d =  document.createElement("div");
+        //         d.className="increase";
+        //         d.style.float="left";
+        //         let img = document.createElement("img");
+        //         let a_2 =document.createElement("a");
+        //         // 设置大小和显示,不然图片大小会变成0 x 0;
+        //         img.src="./images/1.png";
+        //         img.style.width = "400px";
+        //         img.style.height = "300px";
+        //         img.style.display = "block";
+        //         a_2.text=animalInformation[i]['species'];
+        //         a_2.href="show.html";
+        //          sessionStorage.setItem("animal_id",i);
+        //         d.appendChild(img);
+        //         d.appendChild(a_2);
+        //         a.appendChild(d);
+        //     }
+        // }
 
         function user_info(){
             window.location.href="personal-info.html";
@@ -145,6 +147,172 @@
         function back(){
             localStorage.clear();
             window.location.href="index.html";
+        }
+
+        function uniq(array){
+            var temp = []; //一个新的临时数组
+            for(var i = 0; i < array.length; i++){
+                if(temp.indexOf(array[i]) == -1){
+                    temp.push(array[i]);
+                }
+            }
+            return temp;
+        }
+
+        function addSelect1() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    animalInformation=JSON.parse(xhr.responseText);
+                    //alert(xhr.responseText);
+                    var species = new Array();
+                    for(var i=0;i<animalInformation.length;i++){
+                        species[i] = animalInformation[i]['species'];
+                    }
+                    species = uniq(species);
+                    //alert(species);
+                    var objSelectNow=document.getElementById("select1");
+                    var inner="<option value='1'>无</option>";
+                    objSelectNow.innerHTML=inner;
+                    for(var i=0;i<species.length;i++){
+                        var objOption = document.createElement("OPTION");
+                        objOption.text= species[i];
+                        objOption.value=species[i];
+                        objSelectNow.options.add(objOption);
+                    }
+                }
+
+            }
+            var data = {
+                tag1:""
+            };
+            data = JSON.stringify(data);
+            url = "http://localhost:8989/petshelter/pet/selectByTag"
+            xhr.open("post", url, true)
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(data);
+
+        }
+
+        function addOtherSelect(){
+            var select1 = document.getElementById("select1");
+            var species = select1.options[select1.selectedIndex].value;
+            if(species != 1){
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        animalInformation=JSON.parse(xhr.responseText);
+                        //alert(xhr.responseText);
+                        var breed = new Array();
+                        var color = new Array();
+                        var sex = new Array();
+                        for(var i=0;i<animalInformation.length;i++){
+                            breed[i] = animalInformation[i]['breed'];
+                            color[i] = animalInformation[i]['color'];
+                            sex[i] = animalInformation[i]['sex'];
+                        }
+                        breed = uniq(breed);
+                        color = uniq(color);
+                        sex = uniq(sex);
+                        //alert(species);
+                        var select2=document.getElementById("select2");
+                        var inner2="<option value=''>不定</option>";
+                        select2.innerHTML=inner2;
+                        for(var i=0;i<breed.length;i++){
+                            var objOption = document.createElement("OPTION");
+                            objOption.text= breed[i];
+                            objOption.value=breed[i];
+                            select2.options.add(objOption);
+                        }
+                        var select3=document.getElementById("select3");
+                        var inner3="<option value=''>不定</option>";
+                        select3.innerHTML=inner3;
+                        for(var i=0;i<color.length;i++){
+                            var objOption = document.createElement("OPTION");
+                            objOption.text= color[i];
+                            objOption.value=color[i];
+                            select3.options.add(objOption);
+                        }
+                        var select4=document.getElementById("select4");
+                        var inner4="<option value=''>不定</option>";
+                        select4.innerHTML=inner4;
+                        for(var i=0;i<sex.length;i++){
+                            var objOption = document.createElement("OPTION");
+                            objOption.text= sex[i];
+                            objOption.value=sex[i];
+                            select4.options.add(objOption);
+                        }
+                    }
+
+                }
+                var data = {
+                    species:species
+                };
+                data = JSON.stringify(data);
+                url = "http://localhost:8989/petshelter/pet/select"
+                xhr.open("post", url, true)
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.send(data);
+            }else{
+                var select2=document.getElementById("select2");
+                var select3=document.getElementById("select3");
+                var select4=document.getElementById("select4");
+                select2.innerHTML="";
+                select3.innerHTML="";
+                select4.innerHTML="";
+            }
+        }
+
+        function search2() {
+            var select1=document.getElementById("select1");
+            var select2=document.getElementById("select2");
+            var select3=document.getElementById("select3");
+            var select4=document.getElementById("select4");
+            var species = select1.options[select1.selectedIndex].value;
+            var breed = select2.options[select2.selectedIndex].value;
+            var color = select3.options[select3.selectedIndex].value;
+            var sex = select4.options[select4.selectedIndex].value;
+            //alert();
+            if(species != 1){
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+
+                        if(xhr.responseText == "[]"){alert("不存在这样的宠物");}
+                        else{alert(xhr.responseText);}
+                    }
+                }
+                var data = {
+                    species:species,
+                    breed:breed,
+                    color:color,
+                    sex:sex
+                };
+                if(breed==""){
+                    delete data.breed;
+                    delete data[breed];
+                }
+                if(color==""){
+                    delete data.color;
+                    delete data[color];
+                }
+                if(sex==""){
+                    delete data.sex;
+                    delete data[sex];
+                }
+                data = JSON.stringify(data);
+                url = "http://localhost:8989/petshelter/pet/select"
+                xhr.open("post", url, true)
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.send(data);
+            }else{
+                alert("请先选择动物种类");
+            }
+
+        }
+        function search() {
+            search1();
+            //addSelect1();
         }
     </script>
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.css" type="text/css" media="all">
@@ -166,10 +334,10 @@
                         <a href="index.html">主页</a>
                     </li>
                     <li>
-                        <a href="">宠物知识</a>
+                        <a href="find.html">寻宠启示</a>
                     </li>
                     <li>
-                        <a href="appoint.html">领养中心</a>
+                        <a href="appoint.html">预约中心</a>
                     </li>
                     <li>
                         <a href="foster.html">寄养宠物</a>
@@ -196,25 +364,38 @@
 
 <div class="services" id="services">
     <div class="container">
-        <h3 class="agile-title">领养中心</h3>
-
+        <h3 class="agile-title">预约中心</h3>
         <div id="container">
-            <!--    <input type="button" onclick="showTags()" value="展示现在的tag" />-->
-
-<!--            <div class="search bar7">-->
                 <form name="myForm">
                     <input id="searchBar" type="text" name="searchBar" placeholder="请输入您要添加的标签...">
                     <input type="button" onclick="addTag()" value="添加标签">
-                    <input type="button" onclick="search()" value="搜索宠物" />
+                    <input type="button" onclick="search1()" value="搜索宠物" />
                     <br/>
                     <label>(点击已添加的标签即可删除该标签)</label>
                 </form>
-<!--            </div>-->
+<!--            <label>动物种类</label>-->
+<!--            <select id = "select1" onchange="addOtherSelect()" >-->
+<!--            </select>-->
+<!--            <br/>-->
 
+<!--            <label>动物品种</label>-->
+<!--            <select id = "select2">-->
+<!--            </select>-->
+<!--            <br/>-->
 
+<!--            <label>动物颜色</label>-->
+<!--            <select id = "select3">-->
+<!--            </select>-->
+<!--            <br/>-->
+
+<!--            <label>动物性别</label>-->
+<!--            <select id = "select4">-->
+<!--            </select>-->
+<!--            <br/>-->
+
+<!--            <input type="button" value="搜索" onclick="search2()">-->
         </div>
-        <div class="w3_agile_services_grids">
-        </div>
+
     </div>
 
     <div class="w3l-img-side">

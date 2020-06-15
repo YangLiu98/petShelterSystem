@@ -18,7 +18,7 @@
 <body onload="AddModel()">
 <div class="myDiv">
     <div>
-        <h2>待领养的动物</h2>
+        <h2>待预约的动物</h2>
         <center>
             <div id="demo1" class="slideBox">
                 <ul class="items">
@@ -29,7 +29,7 @@
             </div>
             <div class="name">
                 <img src="./images/adopt/p1.jpg" height="50px" width="50px">
-                <span>我叫 maomao</span>
+                <span>我叫 gougou</span>
             </div>
         </center>
         <div class="animal">
@@ -67,9 +67,9 @@
             <div class="animal_me3"><img src="./images/adopt/p11.jpg"></div>
         </div>
         <div class="my_btn">
-            <button class="btn btn-primary btn-lg" id="pet_adopt_modal_btn">预约领养</button>
-            <button class="btn btn-primary btn-lg" id="tianchuan_btn"
-                    style="float: right;position: relative;left: 150px;bottom: 45px">返回中心
+            <button class="btn btn-primary btn-lg" id="pet_adopt_modal_btn">预约</button>
+            <button class="btn btn-primary btn-lg" id="tianchuan_btn" onclick="backToAppoint()"
+                    style="float: right;position: relative;left: 150px;bottom: 45px">返回
             </button>
         </div>
     </div>
@@ -131,6 +131,9 @@
 
 
 <script>
+    function backToAppoint(){
+        window.location.href="appoint.html";
+    }
     function input_set(){
         var number = sessionStorage.getItem("animal_id");
         var animalInformation=eval( sessionStorage.getItem("animalInformation"));
@@ -151,7 +154,7 @@
         let a_3 =document.createElement("p");
         let a_4 =document.createElement("p");
         if(animalInformation[number]['pet_id']){
-        a_1.textContent=animalInformation[number]['pet_id'];}
+        a_1.textContent=animalInformation[number]['pet_id']-1 ;}
         else {
             a_1.textContent="***";
         }
@@ -207,7 +210,7 @@
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
-                    window.location.href="appoint.html";
+                    window.location.href="index.html";
 				}
 			}
         var data={
@@ -224,9 +227,9 @@
         xhr.send(data);
 
 	}
-    $("#tianchuan_btn").click(function () {
-        window.location.href = "./宠物社区.html";
-    });
+    // $("#tianchuan_btn").click(function () {
+    //     window.location.href = "./appoint.html";
+    // });
 </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>宠物领养管理后台</title>
+    <title>宠物预约管理后台</title>
     <!-- 引入css样式文件 -->
     <!-- Bootstrap Core CSS -->
     <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
     <!-- 导航栏部分 -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="">宠物领养管理系统</a>
+            <a class="navbar-brand" href="">宠物预约管理系统</a>
         </div>
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
@@ -51,17 +51,17 @@
                         </li>
                         <li class="list-group-item my_font">
                             <a href="adopt.html">
-                                <i class="fa fa-sitemap fa-fw"></i> 领养管理
+                                <i class="fa fa-sitemap fa-fw"></i> 预约管理
                             </a>
                         </li>
                         <li class="list-group-item my_font">
                             <a href="agree.html">
-                                <i class="fa fa-sitemap fa-fw"></i> 同意领养列表
+                                <i class="fa fa-sitemap fa-fw"></i> 同意预约列表
                             </a>
                         </li>
                         <li class="list-group-item my_font">
                             <a href="disAgree.html">
-                                <i class="fa fa-sitemap fa-fw"></i> 不同意领养列表
+                                <i class="fa fa-sitemap fa-fw"></i> 不同意预约列表
                             </a>
                         </li>
                     </ul>
@@ -70,11 +70,11 @@
         </div><!-- 左侧显示列表部分 end-->
 
     </nav>
-    <!-- 领养表列表查询部分  start-->
+
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">领养申请的审核</h1>
+                <h1 class="page-header">预约申请的审核</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -84,7 +84,7 @@
             <div class="panel-body">
                 <form class="form-inline" method="get" action="">
                     <div class="form-group">
-                        <label for="findByAdoptTime">领养的时间</label>
+                        <label for="findByAdoptTime">预约的时间</label>
                         <input type="date" class="form-control" id="findByAdoptTime" value="" name="adoptTime">
                     </div>
                     <button type="button" class="btn btn-primary" id="adopt_find_modal_btn">查询</button>
