@@ -51,7 +51,7 @@
                         <a id="logout">退出</a>
                         <li id="login_register">
                             <button class="btn-primary btn-lg" data-toggle="modal" data-target="#login"
-                                    onclick="window.location='signIn.html'">注册/登录</button>
+                                    onclick="sign()">注册/登录</button>
                         </li>
 
                 </ul>
@@ -199,7 +199,7 @@
             <br>
             <p>官网&nbsp;&nbsp;<span style="font-size: 22px;color: red">*****</span></p>
             <br>
-            <p><a href="admin.html">管理员登录</a></p>
+            <p><a onclick="sign2()">管理员登录</a></p>
         </div>
 
     </div>
@@ -214,6 +214,14 @@
 <!-- Banner Slider -->
 <script src="./js/user/responsiveslides.min.js"></script>
 <script>
+    function sign(){
+        var myurl="signIn.html"+"?"+"0";
+        window.location.assign(encodeURI(myurl));
+    }
+    function sign2(){
+        var myurl="signIn.html"+"?"+"1";
+        window.location.assign(encodeURI(myurl));
+    }
     function user_info(){
         window.location.href="personal-info.html";
     }

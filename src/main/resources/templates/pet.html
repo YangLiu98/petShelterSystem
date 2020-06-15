@@ -13,9 +13,7 @@
     <link href="./css/admin/dataTables.bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="./css/admin/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="./css/admin/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="./css/admin/boot-crm.css" rel="stylesheet" type="text/css">
+
     <style>
         .panel-heading {
             background-color: #337ab7;
@@ -42,12 +40,12 @@
         }
     </style>
 </head>
-<body>
+<body onload="AddModel()">
 <div id="wrapper">
     <!-- 导航栏部分 -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="">流浪猫狗管理系统</a>
+            <a class="navbar-brand" href="">宠物领养管理系统</a>
         </div>
         <!-- 导航栏右侧图标部分 -->
         <!-- 导航栏右侧图标部分 -->
@@ -152,7 +150,6 @@
 
                     <!-- /.panel-heading -->
                     <table class="table table-bordered table-striped" id="pet_table">
-                        <thead>
                         <tr>
 
                             <th>宠物编号</th>
@@ -162,25 +159,12 @@
                             <th>领养状态</th>
                             <th>操作</th>
                         </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
                     </table>
-                    <div class="row">
-                        <!--分页文字信息  -->
-                        <div class="col-md-8" id="page_info_area"></div>
-                        <!-- 分页条信息 -->
-                        <div class="col-md-4" id="page_nav_area"></div>
-                    </div>
-                    <!-- /.panel-body -->
+
                 </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-12 -->
         </div>
     </div>
-    <!-- 班级列表查询部分  end-->
 </div>
 <!-- 创建宠物模态框 -->
 <div class="modal fade" id="newPet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -372,8 +356,11 @@
 
 <script type="text/javascript">
     function AddModel(){
-        animalInformation=eval( sessionStorage.getItem("animalInformation"));
-        for(var i=0;i<appointInformation.length;i++){
+        console.log("进入");
+       var  animalInformation=eval( sessionStorage.getItem("animalInformation"));
+        var appointInformation=eval( sessionStorage.getItem("appointInformation"));
+
+        for(var i=0;i<animalInformation.length;i++){
             let a = document.getElementById("pet_table");
             let d =  document.createElement("tr");
             d.className="inrease";
@@ -394,13 +381,15 @@
             a_5.style.border="1px solid #ddd";
             let a_6 =document.createElement("td");
             a_6.style.border="1px solid #ddd";
+            let a_7 =document.createElement("td");
+            a_7.style.border="1px solid #ddd";
 
-            a_2.textContent =appointInformation[i]['appointment_id'];
-            a_3.textContent=appointInformation[i]['pet_id'];
-            a_4.textContent=appointInformation[i]['date'];
-            var pet_id=appointInformation[i]['pet_id'];
-            a_5.textContent=animalInformation[pet_id]['species'];
-            var temp=appointInformation[i]['pass'];
+            a_2.textContent =animalInformation[i]['pet_id'];
+            a_3.textContent=animalInformation[i]['species'];
+            a_4.textContent=animalInformation[i]['sex'];
+            var pet_id=animalInformation[i]['pet_id'];
+            a_5.textContent=animalInformation[i]['species'];
+            var temp=animalInformation[i]['pass'];
             console.log(typeof (temp));
             if(temp==false){
                 a_6.textContent="未通过";
@@ -408,16 +397,18 @@
             }else{
                 a_6.textContent="已通过";
             }
+            a_7.textContent="待定";
+
             d.appendChild(a_2);
             d.appendChild(a_3);
             d.appendChild(a_4);
             d.appendChild(a_5);
             d.appendChild(a_6);
+
             a.appendChild(d);
             console.log("创建成功");
         }
     }
-
 </script>
 
 </body>
