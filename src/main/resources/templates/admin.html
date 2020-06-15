@@ -42,7 +42,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="getAppointments()">
 <div id="wrapper">
     <!-- 导航栏部分 -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -169,7 +169,23 @@
 
 
 <script type="text/javascript">
-
+    function getAppointments() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                sessionStorage.setItem("appointInformation",xhr.responseText);
+                alert("存储完毕");
+            }
+        };
+        var data={
+            user_id:0,
+        };
+        url="http://localhost:8989/petshelter/appointment/allMyAppoint"
+        xhr.open("post", url, true)
+        xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+        xhr.setRequestHeader("token",localStorage.getItem("admin"));
+        xhr.send(data);
+    }
 </script>
 
 </body>

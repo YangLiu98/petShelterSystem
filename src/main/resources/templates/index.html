@@ -48,7 +48,7 @@
                                                   id="user_edit_modal_btn" onclick="user_info()"></div>
                         </li>
 
-                        <a id="logout">退出</a>
+                        <a id="logout" onclick="back()">退出</a>
                         <li id="login_register">
                             <button class="btn-primary btn-lg" data-toggle="modal" data-target="#login"
                                     onclick="sign()">注册/登录</button>
@@ -214,6 +214,10 @@
 <!-- Banner Slider -->
 <script src="./js/user/responsiveslides.min.js"></script>
 <script>
+    function back(){
+        localStorage.clear();
+        window.location.href="index.html";
+    }
     function sign(){
         var myurl="signIn.html"+"?"+"0";
         window.location.assign(encodeURI(myurl));
@@ -245,6 +249,9 @@
             if (localStorage['token']!=null){
                 var v = document.getElementById("login_register");
                 v.style.visibility='hidden';
+            }
+            else{
+                window.location.href="signIn.html";
             }
             var xhr = new XMLHttpRequest();
             var type="收容宠物";

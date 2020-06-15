@@ -114,6 +114,9 @@
             //     var v = document.getElementById("login_register");
             //     v.style.visibility='hidden';
             // }
+            //else{
+             //   window.location.href="index.html";
+            //}
             // animalInformation=eval( sessionStorage.getItem("animalInformation"));
             // for(var i=0;i<animalInformation.length;i++){
             //     let a = document.getElementsByClassName("valuable")[0];
@@ -138,6 +141,10 @@
 
         function user_info(){
             window.location.href="personal-info.html";
+        }
+        function back(){
+            localStorage.clear();
+            window.location.href="index.html";
         }
     </script>
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.css" type="text/css" media="all">
@@ -175,7 +182,7 @@
                                                   style="border-radius:50% " value=""
                                                   id="user_edit_modal_btn" onclick="user_info()"></div>
                         </li>
-                        <a id="logout">退出</a>
+                        <a id="logout" onclick="back()">退出</a>
                         <li id="login_register">
                             <button class="btn-primary btn-lg" data-toggle="modal" data-target="#login">注册/登录</button>
                         </li>
