@@ -7,13 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
     <meta name="keywords" content=""/>
+    <style type="text/css">
+        #div1{
+            width:200px;
+            height:200px;
+
+            float:left;
+        }
+        #div2{
+            width:200px;
+            height:200px;
+
+            float:left;
+        }
+        #div3{
+            width:200px;
+            height:200px;
+
+            float:left;
+        }
+    </style>
 
     <script>
         var countTag = 0;
         var tags=new Array("","","","","");
         function  addTag() {
             var tagValue = document.myForm.searchBar.value;
-            var container = document.getElementById("container");
+            var container = document.getElementById("div1");
             if(countTag!=5){
                 for(var i= 0; i < 5; i++){
                     if (tags[i] == tagValue){
@@ -68,20 +88,35 @@
                         for(var i=0;i<animalInformation.length;i++){
                             let a = document.getElementsByClassName("valuable")[0];
                             let d =  document.createElement("div");
+                            var label1 = document.createElement("a");
+                            var label2 = document.createElement("a");
+                            var label3 = document.createElement("a");
+                            var another=document.createElement("br")
                             d.className="increase";
                             d.style.float="left";
                             let img = document.createElement("img");
                             let a_2 =document.createElement("a");
                             // 设置大小和显示,不然图片大小会变成0 x 0;
                             img.src="./images/" + animalInformation[i]['pic']+ ".jpg";
-                            // img.style.width = "400px";
-                            // img.style.height = "300px";
+                            img.style.width = "400px";
+                            img.style.height = "300px";
                             img.style.display = "block";
                             a_2.text=animalInformation[i]['breed'];
+                            var tags = animalInformation[i]['tag'];
+                            var labels = tags.split(",");
+
+                            label1.text = "#"+labels[0]+ " ";
+                            label2.text = "#"+labels[1]+" ";
+                            label3.text = "#"+labels[2]+" ";
                             a_2.href="show.html";
                             sessionStorage.setItem("animal_id",i);
+                            d.style.margin="20px";
                             d.appendChild(img);
                             d.appendChild(a_2);
+                            d.appendChild(another);
+                            d.appendChild(label1);
+                            d.appendChild(label2);
+                            d.appendChild(label3);
                             a.appendChild(d);
                         }
 
@@ -278,8 +313,51 @@
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4 && xhr.status == 200) {
 
-                        if(xhr.responseText == "[]"){alert("不存在这样的宠物");}
-                        else{alert(xhr.responseText);}
+                        if(xhr.responseText == "[]") {
+                            alert("不存在这样的宠物");
+                            document.getElementsByClassName("valuable")[0].innerHTML="";
+                        }
+                        else{if(xhr.responseText != ""){
+                            //alert(","+xhr.responseText+",");
+                            //animalInformation=eval(sessionStorage.getItem("animalInformation"));
+                            document.getElementsByClassName("valuable")[0].innerHTML="";
+                            animalInformation=JSON.parse(xhr.responseText);
+                            for(var i=0;i<animalInformation.length;i++){
+                                let a = document.getElementsByClassName("valuable")[0];
+                                let d =  document.createElement("div");
+                                var label1 = document.createElement("a");
+                                var label2 = document.createElement("a");
+                                var label3 = document.createElement("a");
+                                var another=document.createElement("br")
+                                d.className="increase";
+                                d.style.float="left";
+                                let img = document.createElement("img");
+                                let a_2 =document.createElement("a");
+                                // 设置大小和显示,不然图片大小会变成0 x 0;
+                                img.src="./images/" + animalInformation[i]['pic']+ ".jpg";
+                                img.style.width = "400px";
+                                img.style.height = "300px";
+                                img.style.display = "block";
+                                a_2.text=animalInformation[i]['breed'];
+                                var tags = animalInformation[i]['tag'];
+                                var labels = tags.split(",");
+
+                                label1.text = "#"+labels[0]+ " ";
+                                label2.text = "#"+labels[1]+" ";
+                                label3.text = "#"+labels[2]+" ";
+                                a_2.href="show.html";
+                                sessionStorage.setItem("animal_id",i);
+                                d.style.margin="20px";
+                                d.appendChild(img);
+                                d.appendChild(a_2);
+                                d.appendChild(another);
+                                d.appendChild(label1);
+                                d.appendChild(label2);
+                                d.appendChild(label3);
+                                a.appendChild(d);
+                            }
+
+                        }}
                     }
                 }
                 var data = {
@@ -312,7 +390,7 @@
         }
         function search() {
             search1();
-            //addSelect1();
+            addSelect1();
         }
     </script>
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.css" type="text/css" media="all">
@@ -366,34 +444,44 @@
     <div class="container">
         <h3 class="agile-title">预约中心</h3>
         <div id="container">
+            <div id="div1">
                 <form name="myForm">
+                    <label>按标签查找</label>
+                        <br/>
                     <input id="searchBar" type="text" name="searchBar" placeholder="请输入您要添加的标签...">
                     <input type="button" onclick="addTag()" value="添加标签">
                     <input type="button" onclick="search1()" value="搜索宠物" />
                     <br/>
                     <label>(点击已添加的标签即可删除该标签)</label>
                 </form>
-<!--            <label>动物种类</label>-->
-<!--            <select id = "select1" onchange="addOtherSelect()" >-->
-<!--            </select>-->
-<!--            <br/>-->
+            </div>
+            <div id ="div3"></div>
+                <div id="div2">
+                    <label>精确查找</label>
+                    <br/>
+                    <label>动物种类</label>
+                    <select id = "select1" onchange="addOtherSelect()" >
+                    </select>
+                    <br/>
 
-<!--            <label>动物品种</label>-->
-<!--            <select id = "select2">-->
-<!--            </select>-->
-<!--            <br/>-->
+                    <label>动物品种</label>
+                    <select id = "select2">
+                    </select>
+                    <br/>
 
-<!--            <label>动物颜色</label>-->
-<!--            <select id = "select3">-->
-<!--            </select>-->
-<!--            <br/>-->
+                    <label>动物颜色</label>
+                    <select id = "select3">
+                    </select>
+                    <br/>
 
-<!--            <label>动物性别</label>-->
-<!--            <select id = "select4">-->
-<!--            </select>-->
-<!--            <br/>-->
+                    <label>动物性别</label>
+                    <select id = "select4">
+                    </select>
+                    <br/>
 
-<!--            <input type="button" value="搜索" onclick="search2()">-->
+                    <input type="button" value="搜索" onclick="search2()">
+                </div>
+
         </div>
 
     </div>

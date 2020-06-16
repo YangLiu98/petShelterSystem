@@ -9,6 +9,13 @@ body {
     font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
 }
 
+#div1{
+    width:200px;
+    height:200px;
+    border:2px red solid;
+    float:left;
+}
+
 #container {
     width: 500px;
     height: 820px;
